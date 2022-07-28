@@ -1,0 +1,20 @@
+#include "resource.h"
+
+IDI_ICON ICON "..\\..\\..\\VisualStudio2019\\icon.ico"
+
+IDC_WINMAIN MENU
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "Close(&X)", IDM_EXIT
+    END
+    POPUP "Setting"
+    BEGIN
+        POPUP "ScreenSize"
+        BEGIN
+            MENUITEM "x1", ID_WINDOWSIZEx1
+            MENUITEM "x2", ID_WINDOWSIZEx2
+            MENUITEM "x3", ID_WINDOWSIZEx3
+        END
+    END
+END

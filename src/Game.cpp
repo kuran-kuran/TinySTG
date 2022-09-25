@@ -500,7 +500,8 @@ void Game::Draw(void)
 	Screen& screen = Screen::GetInstance();
 	const ImageData* image_data = GetImageData(BG);
 	const unsigned char* buffer = reinterpret_cast<const unsigned char*>(image_data->buffer) + ((static_cast<size_t>(this->bg_y >> 10)) * 96);
-	screen.DrawSprite(buffer, 0, 0, image_data->width, 64, -1);
+	int draw_x = (Screen::WIDTH - image_data->width) / 2;
+	screen.DrawSprite(buffer, draw_x, 0, image_data->width, 64, -1);
 	for(int i = 0; i < ENEMY_MAX; ++ i)
 	{
 		if(this->enemy[i] == NULL)

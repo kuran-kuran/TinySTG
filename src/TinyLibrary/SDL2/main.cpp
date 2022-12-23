@@ -9,7 +9,6 @@
 int main(int argc, char* argv[])
 {
 	MainLoop_Setup();
-
 	Uint64 beforeTime= SDL_GetPerformanceCounter();
 	Uint64 intervalTime = SDL_GetPerformanceFrequency() / Screen::FPS;
 	bool quit = false;

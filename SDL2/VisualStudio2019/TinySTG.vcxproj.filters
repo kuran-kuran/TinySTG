@@ -169,6 +169,9 @@
     <ClInclude Include="..\..\src\TinyLibrary\SDL2\TinyFile.hpp">
       <Filter>ソース ファイル\src\TinyLibrary\SDL2</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL2\RingBuffer.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Boss1.cpp">
@@ -262,6 +265,9 @@
       <Filter>ソース ファイル\src\TinyLibrary\SDL2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\TinyFile.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL2\RingBuffer.cpp">
       <Filter>ソース ファイル\src\TinyLibrary\SDL2</Filter>
     </ClCompile>
   </ItemGroup>

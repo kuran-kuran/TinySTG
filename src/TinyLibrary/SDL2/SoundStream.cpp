@@ -1,39 +1,43 @@
 #if defined(SDL2)
 
 #include <stdio.h>
+#include <string.h>
 #include "SoundStream.hpp"
 
 SoundStream* SoundStream::sound_stream;
 
-void SoundStreamCallback(void)
-{
-#if false
-	SoundStream& sound_stream = SoundStream::GetInstance();
-	sound_stream.Callback();
-#endif
-}
-
 SoundStream::SoundStream(int frequency)
-:buffer(NULL)
-,buffer_size(SOUND_BUFFER_SIZE)
-,buffer_size_half(buffer_size / 2)
-,sample_index(0)
-,write_buffer(0)
-,request(false)
-,volume(10)
+:audioDeviceID()
+,ringBuffer()
+,writableSize(0)
+,volume(0)
 {
-#if false
-	this->buffer = new unsigned char[this->buffer_size];
-	memset(this->buffer, 0x80, this->buffer_size);
-	Adafruit_Arcada* arcada = GetArcada();
-	analogWriteResolution(8);
-	arcada->enableSpeaker(true);
-	arcada->timerCallback(frequency, SoundStreamCallback);
-#endif
+	this->ringBuffer.Create(SOUND_BUFFER_SIZE);
+	// SDL‰Šú‰»
+	if(SDL_Init(SDL_INIT_AUDIO) != 0)
+	{
+		throw "Error: SDL_Init(SDL_INIT_AUDIO)";
+	}
+	SDL_AudioSpec specs;
+	SDL_zero(specs);
+	specs.freq = frequency;
+	specs.format = AUDIO_U8;
+	specs.channels = 1;
+	specs.samples = SOUND_BUFFER_SIZE / 2;
+	specs.callback = SoundStream::Callback;
+	constexpr int PLAYBACK_DEV = 0;
+	this->audioDeviceID = SDL_OpenAudioDevice(nullptr, PLAYBACK_DEV, &specs, nullptr, 0);
+	if(this->audioDeviceID == 0)
+	{
+		throw "Error: SDL_OpenAudioDevice";
+	}
+	SDL_PauseAudioDevice(this->audioDeviceID, 0);
 }
 
 SoundStream::~SoundStream(void)
 {
+	SDL_CloseAudioDevice(this->audioDeviceID);
+	this->ringBuffer.Release();
 }
 
 void SoundStream::Initialize(int frequency)
@@ -43,13 +47,11 @@ void SoundStream::Initialize(int frequency)
 
 void SoundStream::Finalize(void)
 {
-#if false
 	if(SoundStream::sound_stream != NULL)
 	{
 		delete SoundStream::sound_stream;
 		SoundStream::sound_stream = NULL;
 	}
-#endif
 }
 
 SoundStream& SoundStream::GetInstance()
@@ -59,45 +61,19 @@ SoundStream& SoundStream::GetInstance()
 
 void SoundStream::Update(void)
 {
-#if false
-	int play_buffer = 0;
-	if(this->sample_index >= this->buffer_size_half)
-	{
-		play_buffer = 1;
-	}
-	if(this->write_buffer == play_buffer)
-	{
-		this->request = true;
-	}
-#endif
+	this->writableSize = static_cast<int>(this->ringBuffer.GetWritableSize());
 }
 
 int SoundStream::GetWritableSize(void) const
 {
-#if false
-	if(this->request == false)
-	{
-		return 0;
-	}
-	return this->buffer_size_half;
-#endif
-	return 0;
+	return this->writableSize;
 }
 
 bool SoundStream::Write(const unsigned char* buffer)
 {
-#if false
-	int play_buffer = 0;
-	if(this->sample_index >= this->buffer_size_half)
-	{
-		play_buffer = 1;
-	}
-	this->write_buffer = 1 - play_buffer;
-	memcpy(&this->buffer[this->buffer_size_half * write_buffer], buffer, this->buffer_size_half);
-	this->request = false;
+	this->ringBuffer.Write(buffer, this->writableSize);
+	this->writableSize = 0;
 	return true;
-#endif
-	return false;
 }
 
 // volume = 0-10
@@ -122,25 +98,26 @@ int SoundStream::GetVolume(void)
 // 2: >> 6
 // 1: >> 7
 // 0: >> 8
-void SoundStream::Callback(void)
+void SoundStream::Callback(void *, Uint8 * stream, int len)
 {
-#if false
-	if(this->volume >= 8)
+	SoundStream& sound_stream = SoundStream::GetInstance();
+	int readableSize = static_cast<int>(sound_stream.ringBuffer.GetReadableSize());
+	unsigned char* buffer = new unsigned char[len];
+	memset(buffer, 0, len);
+	int index = 0;
+	if(len > readableSize)
 	{
-		int volume_shift = (this->volume - 8);
-		analogWrite(ARCADA_RIGHT_AUDIO_PIN, static_cast<unsigned short>(this->buffer[this->sample_index] << volume_shift));
+		index = len - readableSize;
 	}
-	else
+	if(len < readableSize)
 	{
-		int volume_shift = (8 - this->volume);
-		analogWrite(ARCADA_RIGHT_AUDIO_PIN, static_cast<unsigned short>(this->buffer[this->sample_index] >> volume_shift));
+		readableSize = len;
 	}
-	++ this->sample_index;
-	if(this->sample_index >= this->buffer_size)
+	if(readableSize > 0)
 	{
-		this->sample_index = 0;
+		sound_stream.ringBuffer.Read(&buffer[index], readableSize);
 	}
-#endif
+	memcpy(stream, buffer, len);
 }
 
 #endif

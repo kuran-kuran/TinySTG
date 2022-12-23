@@ -62,6 +62,7 @@
     <ClInclude Include="..\..\src\TinyLibrary\Font6x8_65536.h" />
     <ClInclude Include="..\..\src\TinyLibrary\Mathmatics.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL2\Controller.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL2\RingBuffer.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL2\Screen.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL2\SoundStream.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL2\TinyFile.hpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="..\..\src\TinyLibrary\Mathmatics.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\Controller.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\main.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL2\RingBuffer.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\Screen.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\SoundStream.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL2\TinyFile.cpp" />

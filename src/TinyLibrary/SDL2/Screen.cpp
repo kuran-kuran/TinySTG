@@ -1,11 +1,19 @@
-#if defined(_WIN32) && !defined(SDL2)
+#if defined(SDL2)
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+#if defined(_WIN64)
+#pragma comment(lib, "../../lib/sdl2/sdl2/lib/x64/SDL2.lib")
+#pragma comment(lib, "../../lib/sdl2/sdl2/lib/x64/SDL2main.lib")
+#pragma comment(lib, "../../lib/sdl2/sdl2_image/lib/x64/SDL2_image.lib")
+#else
+#pragma comment(lib, "../../lib/sdl2/sdl2/lib/x86/SDL2.lib")
+#pragma comment(lib, "../../lib/sdl2/sdl2/lib/x86/SDL2main.lib")
+#pragma comment(lib, "../../lib/sdl2/sdl2_image/lib/x86/SDL2_image.lib")
+#endif
 #include "../Mathmatics.hpp"
-#include "WinMain.hpp"
 #include "Screen.hpp"
 
 #if defined(USE_COLOR256)
@@ -48,7 +56,30 @@ Screen::Screen(int color_mode)
 	}
 	this->screen_buffer = new unsigned char[this->buffer_size];
 	memset(this->screen_buffer, 0, this->buffer_size);
-	this->frame_buffer = GetFrameBuffer();
+	// SDL‰Šú‰»
+	if(SDL_Init(SDL_INIT_VIDEO) != 0)
+	{
+		throw "Error: SDL_Init";
+	}
+	atexit(SDL_Quit);
+	this->window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+	if(this->window == NULL)
+	{
+		throw "Error: SDL_CreateWindow";
+	}
+	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if(this->renderer == NULL)
+	{
+		throw "Error: SDL_CreateRenderer";
+	}
+	SDL_RenderSetLogicalSize(renderer, WIDTH, HEIGHT);
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	this->screenSurface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
+	if(this->screenSurface == NULL)
+	{
+		throw "Error: SDL_CreateRenderer";
+	}
+	memset(this->screenSurface->pixels, 0, WIDTH * HEIGHT * sizeof(unsigned int));
 }
 
 Screen::~Screen(void)
@@ -58,6 +89,8 @@ Screen::~Screen(void)
 		delete [] this->screen_buffer;
 		this->screen_buffer = NULL;
 	}
+	SDL_DestroyRenderer(this->renderer);
+	SDL_DestroyWindow(this->window);
 }
 
 void Screen::Initialize(int color_mode)
@@ -102,6 +135,7 @@ void Screen::DrawBegin(void)
 
 void Screen::DrawEnd(void)
 {
+	unsigned int* frameBuffer = reinterpret_cast<unsigned int*>(this->screenSurface->pixels);
 	if(this->color_mode == 8)
 	{
 		for(int y = 0; y < HEIGHT; ++ y)
@@ -110,7 +144,7 @@ void Screen::DrawEnd(void)
 			{
 				unsigned char color_index = screen_buffer[y * WIDTH + x];
 				unsigned int color = Screen::color_table[color_index];
-				frame_buffer[(HEIGHT - y - 1) * WIDTH + x] = color;
+				frameBuffer[y * WIDTH + x] = color;
 			}
 		}
 	}
@@ -122,10 +156,21 @@ void Screen::DrawEnd(void)
 			for(int x = 0; x < WIDTH; ++ x)
 			{
 				unsigned short color = screen_buffer16[y * WIDTH + x];
-				frame_buffer[(HEIGHT - y - 1) * WIDTH + x] = color;
+				frameBuffer[y * WIDTH + x] = Color16To32(color);
 			}
 		}
 	}
+	SDL_Texture* screenTexture = SDL_CreateTextureFromSurface(this->renderer, this->screenSurface);
+	SDL_Rect sourceRect = {
+		0, 0, WIDTH, HEIGHT
+	};
+	SDL_Rect destRect =
+	{
+		0, 0, WIDTH, HEIGHT
+	};
+	SDL_RenderCopy(this->renderer, screenTexture, &sourceRect, &destRect);
+	SDL_DestroyTexture(screenTexture);
+	SDL_RenderPresent(this->renderer);
 }
 
 void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height, int color_key)

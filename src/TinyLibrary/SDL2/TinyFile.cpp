@@ -1,4 +1,4 @@
-#if defined(_WIN32) && !defined(SDL2)
+#if defined(SDL2)
 
 #include "TinyFile.hpp"
 
@@ -19,6 +19,7 @@ bool TinyFile::Open(const char* filepath, unsigned int mode)
 	{
 		return false;
 	}
+#if defined(_WIN32)
 	if(mode & READ)
 	{
 		fopen_s(&this->file, filepath, "rb");
@@ -37,6 +38,26 @@ bool TinyFile::Open(const char* filepath, unsigned int mode)
 			this->filesize = 0;
 		}
 	}
+#else
+	if(mode & READ)
+	{
+		this->file = fopen(filepath, "rb");
+	}
+	else if(mode & WRITE)
+	{
+		this->file = fopen(filepath, "wb");
+		this->filesize = 0;
+	}
+	else
+	{
+		this->file = fopen(filepath, "rb+");
+		if(this->file == NULL)
+		{
+			this->file = fopen(filepath, "wb+");
+			this->filesize = 0;
+		}
+	}
+#endif
 	if(this->file == NULL)
 	{
 		return false;

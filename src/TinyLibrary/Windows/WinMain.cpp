@@ -1,4 +1,4 @@
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(SDL2)
 #include <windows.h>
 #include <mmsystem.h>
 #include "resource.h"

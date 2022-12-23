@@ -1,7 +1,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#if defined(_WIN32)
+#if defined(SDL2)
+#define CONFIG_FPS 60
+#define CONFIG_WIDTH 80
+#define CONFIG_HEIGHT 64
+#define CONFIG_TITLE "TinySTG"
+
+#elif defined(_WIN32)
 // Windows setting
 #define CONFIG_FPS 60
 #define CONFIG_WIDTH 80

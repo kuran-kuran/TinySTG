@@ -3,7 +3,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <windows.h>
 #if defined(_WIN64)
 #pragma comment(lib, "../../lib/sdl2/sdl2/lib/x64/SDL2.lib")
 #pragma comment(lib, "../../lib/sdl2/sdl2/lib/x64/SDL2main.lib")
@@ -59,10 +58,10 @@ Screen::Screen(int color_mode)
 	// SDL‰Šú‰»
 	if(SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
-		throw "Error: SDL_Init";
+		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
 	atexit(SDL_Quit);
-	this->window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+	this->window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 	if(this->window == NULL)
 	{
 		throw "Error: SDL_CreateWindow";
@@ -403,7 +402,11 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 	char* output_text = reinterpret_cast<char*>(malloc(128));
 	va_list arglist;
 	va_start(arglist, text);
+#if defined(_WIN32)
 	vsprintf_s(output_text, 128, text, arglist);
+#else
+	vsprintf(output_text, text, arglist);
+#endif
 	va_end(arglist);
 	unsigned char* output_text_temp = reinterpret_cast<unsigned char*>(output_text);
 	const void* font = NULL;
@@ -528,7 +531,11 @@ void Screen::DrawNumberFont(int x, int y, const char* text, ...)
 	char* output_text = reinterpret_cast<char*>(malloc(128));
 	va_list arglist;
 	va_start(arglist, text);
+#if defined(_WIN32)
 	vsprintf_s(output_text, 128, text, arglist);
+#else
+	vsprintf(output_text, text, arglist);
+#endif
 	va_end(arglist);
 	char* output_text_temp = output_text;
 	const void* font = NULL;

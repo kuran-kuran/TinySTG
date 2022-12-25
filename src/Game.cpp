@@ -26,10 +26,12 @@
 Game::Game(void)
 :stage(1)
 ,player()
+,shot_cool_time_count(0)
 ,bullet_rate(0)
 ,bullet_rate_min(0)
 ,bullet_speed(300)
 ,bullet_speed_add(500)
+,spawn_info()
 ,spawn(2)
 ,boss(false)
 ,boss_appear_count(BOSS_APPEAR_COUNT)
@@ -70,6 +72,7 @@ Game::Game(void)
 //	{
 //		this->sound_handle[i] = -1;
 //	}
+	memset(this->spawn_info, 0, sizeof(this->spawn_info));
 }
 
 Game::~Game(void)

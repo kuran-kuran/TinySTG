@@ -59,6 +59,14 @@ void Controller::Update(void)
 		{
 			this->button |= BUTTON_2;
 		}
+		if(state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
+		{
+			this->button |= BUTTON_START;
+		}
+		if(state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)
+		{
+			this->button |= BUTTON_SELECT;
+		}
 		if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)
 		{
 			this->button |= BUTTON_UP;
@@ -151,6 +159,11 @@ void Controller::Update(void)
 	if(GetAsyncKeyState('X') & 0x8000)
 	{
 		this->button |= BUTTON_2;
+	}
+	if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+	{
+		this->button |= BUTTON_START;
+		this->button |= BUTTON_SELECT;
 	}
 	if(GetAsyncKeyState(VK_UP) & 0x8000)
 	{

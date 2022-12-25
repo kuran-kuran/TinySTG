@@ -63,8 +63,9 @@ void MainLoop_Finalize(void)
 	Global::Finalize();
 }
 
-void MainLoop_Loop(void)
+bool MainLoop_Loop(void)
 {
+	bool exit = false;
 	bool status;
 	Global& global = Global::GetInstance();
 	Screen& screen = Screen::GetInstance();
@@ -263,8 +264,13 @@ void MainLoop_Loop(void)
 		}
 		break;
 	}
+	if((button & Controller::BUTTON_START) && (button & Controller::BUTTON_SELECT))
+	{
+		exit = true;
+	}
 	screen.DrawEnd();
 	global.before_button = button;
+	return exit;
 }
 
 void MainLoop_NoWaitLoop(void)

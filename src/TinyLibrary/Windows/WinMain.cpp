@@ -8,7 +8,7 @@
 
 void MainLoop_Setup(void);
 void MainLoop_Finalize(void);
-void MainLoop_Loop(void);
+bool MainLoop_Loop(void);
 void MainLoop_NoWaitLoop(void);
 
 HINSTANCE instanceHandle;
@@ -223,7 +223,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 			{
 				InvalidateRect(windowHandle, NULL, FALSE);
 				UpdateWindow(windowHandle);
-				MainLoop_Loop();
+				bool exit = MainLoop_Loop();
+				if(exit == true)
+				{
+					DestroyWindow(windowHandle);
+				}
 				beforeTime = time;
 			}
 			MainLoop_NoWaitLoop();

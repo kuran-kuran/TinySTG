@@ -1,7 +1,14 @@
 #ifndef DEPENDENT_HPP
 #define DEPENDENT_HPP
 
-#if defined(_WIN32)
+#if defined(SDL2)
+	#include <string>
+	#include "SDL2/Screen.hpp"
+	#include "SDL2/Controller.hpp"
+	#include "SDL2/SoundStream.hpp"
+	#include "SDL2/TinyFile.hpp"
+	#define String std::string
+#elif defined(_WIN32)
 	#include <string>
 	#include "Windows/Screen.hpp"
 	#include "Windows/Controller.hpp"

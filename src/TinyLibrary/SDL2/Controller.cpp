@@ -10,6 +10,10 @@ Controller::Controller(void)
 ,touch(false)
 ,gameController(NULL)
 {
+	if(SDL_InitSubSystem(SDL_INIT_JOYSTICK) != 0)
+	{
+		throw "Error: SDL_Init(SDL_INIT_JOYSTICK)";
+	}
 	int numJoysticks = SDL_NumJoysticks();
 	if((numJoysticks > 0) && SDL_IsGameController(0))
 	{
@@ -64,6 +68,22 @@ void Controller::Update(void)
 		{
 			this->button |= BUTTON_2;
 		}
+		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_START) == 1)
+		{
+			this->button |= BUTTON_START;
+		}
+		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_BACK) == 1)
+		{
+			this->button |= BUTTON_SELECT;
+		}
+		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER) == 1)
+		{
+			this->button |= BUTTON_START;
+		}
+		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) == 1)
+		{
+			this->button |= BUTTON_SELECT;
+		}
 		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP) == 1)
 		{
 			this->button |= BUTTON_UP;
@@ -85,7 +105,6 @@ void Controller::Update(void)
 	const Uint8* state = SDL_GetKeyboardState(NULL);
 	if(state != NULL)
 	{
-		printf("%u\n", state[SDL_SCANCODE_Z]);
 		if(state[SDL_SCANCODE_Z] == 1)
 		{
 			this->button |= BUTTON_1;
@@ -93,6 +112,11 @@ void Controller::Update(void)
 		if(state[SDL_SCANCODE_X] == 1)
 		{
 			this->button |= BUTTON_2;
+		}
+		if(state[SDL_SCANCODE_ESCAPE] == 1)
+		{
+			this->button |= BUTTON_START;
+			this->button |= BUTTON_SELECT;
 		}
 		if(state[SDL_SCANCODE_UP] == 1)
 		{

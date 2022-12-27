@@ -1,4 +1,5 @@
-#if defined(_WIN32)
+#if defined(SDL2)
+#elif defined(_WIN32)
 #elif defined(__ANDROID__)
 #elif defined(__APPLE__)
 #elif defined(ARDUINO_SAMD_ZERO) && defined(CRYSTALLESS) && defined(USBCON)

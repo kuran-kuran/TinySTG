@@ -37,6 +37,7 @@
 	#include "PyBadge/TinyFile.hpp"
 #else
 	#include <string>
+	#include "Pico/Pico.h"
 	#include "Pico/Screen.hpp"
 	#include "Pico/Controller.hpp"
 	#include "Pico/SoundStream.hpp"

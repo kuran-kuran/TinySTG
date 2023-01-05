@@ -137,3 +137,5 @@ TinyFile.o: ../../src/TinyLibrary/SDL2/TinyFile.cpp
 RingBuffer.o: ../../src/TinyLibrary/SDL2/RingBuffer.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<
 
+clean:
+	-rm -f $(OBJS) $(TARGET) *.d

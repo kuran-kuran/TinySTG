@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\src">
+      <UniqueIdentifier>{d1579a02-454f-427b-a1e8-8eaa93b38308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\TinyLibrary">
+      <UniqueIdentifier>{2a647910-3897-4bb2-9271-dad0a7abffff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\TinyLibrary\SDL">
+      <UniqueIdentifier>{1de1397a-f9b0-4201-bc5c-31693fb443ef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Config.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Bg.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\bgm_short.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Bomb.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss1.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss2.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss3.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss4.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss5.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Boss6.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Bullet.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Character.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Crush.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CrushBoss.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DaimonLogo.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy1.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy2.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy3.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy4.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Enemy5.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Explode.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Get.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Global.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Gun.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MainLoop.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Otoyoi.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Player.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PowerUp.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PowerUp.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Resource.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Shot.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Sound.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary.hpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TitleLogo.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TuchikureLogo.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\AdpcmDecorder.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Dependent.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Font4x6.h">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Font4x6_65536.h">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Font6x8.h">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Font6x8_65536.h">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Mathmatics.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SoundMixer.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SoundPlayer.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\TinyLibrary.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\Controller.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\RingBuffer.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\Screen.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\SoundStream.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\TinyFile.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Boss1.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Boss2.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Boss3.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Boss4.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Boss5.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Boss6.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Bullet.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy1.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy2.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy3.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy4.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy5.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Explode.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Global.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MainLoop.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Player.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PowerUp.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Resource.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Shot.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Sound.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\AdpcmDecorder.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\Mathmatics.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SoundMixer.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SoundPlayer.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\Controller.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\main.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\RingBuffer.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\Screen.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\SoundStream.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\TinyFile.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

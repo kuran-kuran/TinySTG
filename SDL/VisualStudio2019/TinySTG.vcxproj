@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Config.h" />
+    <ClInclude Include="..\..\src\Bg.h" />
+    <ClInclude Include="..\..\src\bgm_short.h" />
+    <ClInclude Include="..\..\src\Bomb.h" />
+    <ClInclude Include="..\..\src\Boss1.hpp" />
+    <ClInclude Include="..\..\src\Boss2.hpp" />
+    <ClInclude Include="..\..\src\Boss3.hpp" />
+    <ClInclude Include="..\..\src\Boss4.hpp" />
+    <ClInclude Include="..\..\src\Boss5.hpp" />
+    <ClInclude Include="..\..\src\Boss6.hpp" />
+    <ClInclude Include="..\..\src\Bullet.hpp" />
+    <ClInclude Include="..\..\src\Character.h" />
+    <ClInclude Include="..\..\src\Crush.h" />
+    <ClInclude Include="..\..\src\CrushBoss.h" />
+    <ClInclude Include="..\..\src\DaimonLogo.h" />
+    <ClInclude Include="..\..\src\Enemy.hpp" />
+    <ClInclude Include="..\..\src\Enemy1.hpp" />
+    <ClInclude Include="..\..\src\Enemy2.hpp" />
+    <ClInclude Include="..\..\src\Enemy3.hpp" />
+    <ClInclude Include="..\..\src\Enemy4.hpp" />
+    <ClInclude Include="..\..\src\Enemy5.hpp" />
+    <ClInclude Include="..\..\src\Explode.hpp" />
+    <ClInclude Include="..\..\src\Game.hpp" />
+    <ClInclude Include="..\..\src\Get.h" />
+    <ClInclude Include="..\..\src\Global.hpp" />
+    <ClInclude Include="..\..\src\Gun.h" />
+    <ClInclude Include="..\..\src\MainLoop.hpp" />
+    <ClInclude Include="..\..\src\Otoyoi.h" />
+    <ClInclude Include="..\..\src\Player.hpp" />
+    <ClInclude Include="..\..\src\PowerUp.h" />
+    <ClInclude Include="..\..\src\PowerUp.hpp" />
+    <ClInclude Include="..\..\src\Resource.hpp" />
+    <ClInclude Include="..\..\src\Shot.hpp" />
+    <ClInclude Include="..\..\src\Sound.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\AdpcmDecorder.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\Dependent.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\Font4x6.h" />
+    <ClInclude Include="..\..\src\TinyLibrary\Font4x6_65536.h" />
+    <ClInclude Include="..\..\src\TinyLibrary\Font6x8.h" />
+    <ClInclude Include="..\..\src\TinyLibrary\Font6x8_65536.h" />
+    <ClInclude Include="..\..\src\TinyLibrary\Mathmatics.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\Controller.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\RingBuffer.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\Screen.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\SoundStream.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SDL\TinyFile.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SoundMixer.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\SoundPlayer.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\TinyLibrary.hpp" />
+    <ClInclude Include="..\..\src\TitleLogo.h" />
+    <ClInclude Include="..\..\src\TuchikureLogo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Boss1.cpp" />
+    <ClCompile Include="..\..\src\Boss2.cpp" />
+    <ClCompile Include="..\..\src\Boss3.cpp" />
+    <ClCompile Include="..\..\src\Boss4.cpp" />
+    <ClCompile Include="..\..\src\Boss5.cpp" />
+    <ClCompile Include="..\..\src\Boss6.cpp" />
+    <ClCompile Include="..\..\src\Bullet.cpp" />
+    <ClCompile Include="..\..\src\Enemy.cpp" />
+    <ClCompile Include="..\..\src\Enemy1.cpp" />
+    <ClCompile Include="..\..\src\Enemy2.cpp" />
+    <ClCompile Include="..\..\src\Enemy3.cpp" />
+    <ClCompile Include="..\..\src\Enemy4.cpp" />
+    <ClCompile Include="..\..\src\Enemy5.cpp" />
+    <ClCompile Include="..\..\src\Explode.cpp" />
+    <ClCompile Include="..\..\src\Game.cpp" />
+    <ClCompile Include="..\..\src\Global.cpp" />
+    <ClCompile Include="..\..\src\MainLoop.cpp" />
+    <ClCompile Include="..\..\src\Player.cpp" />
+    <ClCompile Include="..\..\src\PowerUp.cpp" />
+    <ClCompile Include="..\..\src\Resource.cpp" />
+    <ClCompile Include="..\..\src\Shot.cpp" />
+    <ClCompile Include="..\..\src\Sound.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\AdpcmDecorder.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\Mathmatics.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\Controller.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\main.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\RingBuffer.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\Screen.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\SoundStream.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SDL\TinyFile.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SoundMixer.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\SoundPlayer.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{c3d62587-6b9e-4a00-a126-66c6c7cb48d9}</ProjectGuid>
+    <RootNamespace>TinySTG</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);SDL</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\lib\sdl\sdl\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);SDL</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\lib\sdl\sdl\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);SDL</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\lib\sdl\sdl\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);SDL</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\lib\sdl\sdl\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

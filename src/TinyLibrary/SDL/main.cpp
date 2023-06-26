@@ -1,7 +1,10 @@
 #if defined(SDL)
 
+#ifdef _WIN32
 #include <SDL.h>
-//#include <SDL_image.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include "../../TinyLibrary.hpp"
 #include "../../MainLoop.hpp"
 #include "../../Global.hpp"

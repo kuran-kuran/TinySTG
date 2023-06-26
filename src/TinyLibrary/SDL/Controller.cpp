@@ -58,52 +58,49 @@ void Controller::Reset(void)
 void Controller::Update(void)
 {
 	this->button = 0;
-#if 0
-	// コントローラー
-	if(this->gameController != NULL)
+	if(SDL_JoystickGetButton(this->joystick, 0) != 0)
 	{
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_A) == 1)
-		{
-			this->button |= BUTTON_1;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_B) == 1)
-		{
-			this->button |= BUTTON_2;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_START) == 1)
-		{
-			this->button |= BUTTON_START;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_BACK) == 1)
-		{
-			this->button |= BUTTON_SELECT;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_LEFTSHOULDER) == 1)
-		{
-			this->button |= BUTTON_START;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) == 1)
-		{
-			this->button |= BUTTON_SELECT;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_DPAD_UP) == 1)
-		{
-			this->button |= BUTTON_UP;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1)
-		{
-			this->button |= BUTTON_DOWN;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1)
-		{
-			this->button |= BUTTON_LEFT;
-		}
-		if(SDL_GameControllerGetButton(this->gameController, SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1)
-		{
-			this->button |= BUTTON_RIGHT;
-		}
+		this->button |= BUTTON_1;
 	}
-#endif
+	if(SDL_JoystickGetButton(this->joystick, 1) != 0)
+	{
+		this->button |= BUTTON_2;
+	}
+	Uint8 hat = SDL_JoystickGetHat(this->joystick, 0);
+	if(hat & SDL_HAT_UP)
+	{
+		this->button |= BUTTON_UP;
+	}
+	if(hat & SDL_HAT_RIGHT)
+	{
+		this->button |= BUTTON_RIGHT;
+	}
+	if(hat & SDL_HAT_DOWN)
+	{
+		this->button |= BUTTON_DOWN;
+	}
+	if(hat & SDL_HAT_LEFT)
+	{
+		this->button |= BUTTON_LEFT;
+	}
+	int xMove = SDL_JoystickGetAxis(this->joystick, 0);
+	if(xMove < -16384)
+	{
+		this->button |= BUTTON_LEFT;
+	}
+	else if(xMove > 16384)
+	{
+		this->button |= BUTTON_RIGHT;
+	}
+	int yMove = SDL_JoystickGetAxis(this->joystick, 1);
+	if(yMove < -16384)
+	{
+		this->button |= BUTTON_UP;
+	}
+	else if(yMove > 16384)
+	{
+		this->button |= BUTTON_DOWN;
+	}
 	// キーボード
 	const Uint8* state = SDL_GetKeyState(NULL);
 	if(state != NULL)

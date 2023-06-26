@@ -1,7 +1,11 @@
 #ifndef TINYSOUNDSTREAM_HPP
 #define TINYSOUNDSTREAM_HPP
 
+#ifdef _WIN32
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include "RingBuffer.hpp"
 
 class SoundStream

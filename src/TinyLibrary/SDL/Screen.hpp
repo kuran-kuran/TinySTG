@@ -2,8 +2,11 @@
 #define SCREEN_HPP
 
 #include "../../../Config.h"
+#ifdef _WIN32
 #include <SDL.h>
-//#include <SDL_image.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 #define USE_COLOR256
 //#define USE_COLOR65536

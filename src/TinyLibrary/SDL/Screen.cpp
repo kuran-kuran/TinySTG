@@ -58,22 +58,7 @@ Screen::Screen(int color_mode)
 	{
 		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
-	this->frameBufferSurface = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-#if 0
-	atexit(SDL_Quit);
-	this->window = SDL_CreateWindow("TinySTG", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-	if(this->window == NULL)
-	{
-		throw "Error: SDL_CreateWindow";
-	}
-	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if(this->renderer == NULL)
-	{
-		throw "Error: SDL_CreateRenderer";
-	}
-	SDL_RenderSetLogicalSize(renderer, WIDTH, HEIGHT);
-	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-#endif
+	this->frameBufferSurface = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
 	this->screenSurface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
 	if(this->screenSurface == NULL)
 	{
@@ -176,19 +161,6 @@ void Screen::DrawEnd(void)
 	};
 	SDL_BlitSurface(this->screenSurface, &sourceRect, this->frameBufferSurface, &destRect);
 	SDL_Flip(this->frameBufferSurface);
-#if 0
-	SDL_Texture* screenTexture = SDL_CreateTextureFromSurface(this->renderer, this->screenSurface);
-	SDL_Rect sourceRect = {
-		0, 0, WIDTH, HEIGHT
-	};
-	SDL_Rect destRect =
-	{
-		0, 0, WIDTH, HEIGHT
-	};
-	SDL_RenderCopy(this->renderer, screenTexture, &sourceRect, &destRect);
-	SDL_DestroyTexture(screenTexture);
-	SDL_RenderPresent(this->renderer);
-#endif
 }
 
 void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height, int color_key)

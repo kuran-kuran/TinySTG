@@ -1,7 +1,11 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP
 
+#ifdef _WIN32
 #include <SDL.h>
+#else
+#include <SDL/SDL.h>
+#endif
 
 class Controller
 {

@@ -61,10 +61,11 @@ Screen::Screen(int color_mode)
 		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
 #ifdef _WIN32
-	this->frameBufferSurface = SDL_SetVideoMode(this->scaleWidth, this->scaleHeight, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	this->frameBufferSurface = SDL_SetVideoMode(CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 #else
-	this->frameBufferSurface = SDL_SetVideoMode(this->scaleWidth, this->scaleHeight, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+	this->frameBufferSurface = SDL_SetVideoMode(CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
 #endif
+	memset(this->frameBufferSurface->pixels, 0, CONFIG_FRAMEBUFFER_WIDTH * CONFIG_FRAMEBUFFER_HEIGHT * sizeof(unsigned int));
 }
 
 Screen::~Screen(void)
@@ -138,7 +139,7 @@ void Screen::DrawEnd(void)
 				{
 					for(int xx = 0; xx < CONFIG_SCALE; ++ xx)
 					{
-						int index = ((y * CONFIG_SCALE) + yy) * pitch + ((x * CONFIG_SCALE) + xx);
+						int index = ((y * CONFIG_SCALE) + yy + CONFIG_Y_ADJUST) * pitch + ((x * CONFIG_SCALE) + xx);
 						frameBuffer[index] = color;
 					}
 				}

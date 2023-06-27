@@ -1,7 +1,9 @@
 #if defined(SDL)
 
 #include <stdio.h>
+#include <string>
 #include "Controller.hpp"
+#include "Screen.hpp"
 
 Controller* Controller::controller = NULL;
 
@@ -58,6 +60,7 @@ void Controller::Reset(void)
 void Controller::Update(void)
 {
 	this->button = 0;
+#ifdef _WIN32e
 	if(SDL_JoystickGetButton(this->joystick, 0) != 0)
 	{
 		this->button |= BUTTON_1;
@@ -135,6 +138,25 @@ void Controller::Update(void)
 			this->button |= BUTTON_RIGHT;
 		}
 	}
+#else
+	const Uint8* state = SDL_GetKeyState(NULL);
+	std::string key;
+	for(int i = 0; i < SDLK_UNDO; ++ i)
+	{
+		if(state[i] == 1)
+		{
+			char tmp[10];
+#ifdef _WIN32
+			sprintf_s(tmp, 10, "%d,", i);
+#else
+			sprintf(tmp, "%d,", i);
+#endif
+			key = key + tmp;
+		}
+	}
+	Screen& screen = Screen::GetInstance();
+	screen.DrawFont(0, 0, key.c_str());
+#endif
 }
 
 unsigned int Controller::GetButton(void)

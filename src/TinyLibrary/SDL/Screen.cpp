@@ -60,6 +60,7 @@ Screen::Screen(int color_mode)
 	{
 		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
+	SDL_ShowCursor(SDL_DISABLE);
 #ifdef _WIN32
 	this->frameBufferSurface = SDL_SetVideoMode(CONFIG_FRAMEBUFFER_WIDTH, CONFIG_FRAMEBUFFER_HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 #else

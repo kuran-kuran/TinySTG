@@ -7,6 +7,13 @@
 #define CONFIG_HEIGHT 64
 #define CONFIG_TITLE "TinySTG"
 
+#elif defined(SDL)
+#define CONFIG_FPS 60
+#define CONFIG_WIDTH 80
+#define CONFIG_HEIGHT 64
+#define CONFIG_SCALE 3
+#define CONFIG_TITLE "TinySTG"
+
 #elif defined(_WIN32)
 // Windows setting
 #define CONFIG_FPS 60

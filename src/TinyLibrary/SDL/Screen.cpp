@@ -46,6 +46,8 @@ const unsigned int Screen::color_table[256] =
 Screen::Screen(int color_mode)
 :color_mode(color_mode)
 ,buffer_size(WIDTH * HEIGHT)
+,scaleWidth(WIDTH * CONFIG_SCALE)
+,scaleHeight(HEIGHT * CONFIG_SCALE)
 {
 	if(color_mode == 16)
 	{
@@ -58,13 +60,11 @@ Screen::Screen(int color_mode)
 	{
 		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
-	this->frameBufferSurface = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
-	this->screenSurface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
-	if(this->screenSurface == NULL)
-	{
-		throw "Error: SDL_CreateRenderer";
-	}
-	memset(this->screenSurface->pixels, 0, WIDTH * HEIGHT * sizeof(unsigned int));
+#ifdef _WIN32
+	this->frameBufferSurface = SDL_SetVideoMode(this->scaleWidth, this->scaleHeight, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+#else
+	this->frameBufferSurface = SDL_SetVideoMode(this->scaleWidth, this->scaleHeight, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+#endif
 }
 
 Screen::~Screen(void)
@@ -74,7 +74,6 @@ Screen::~Screen(void)
 		delete [] this->screen_buffer;
 		this->screen_buffer = NULL;
 	}
-	SDL_FreeSurface(this->screenSurface);
 	SDL_FreeSurface(this->frameBufferSurface);
 	SDL_Quit();
 }
@@ -121,11 +120,12 @@ void Screen::DrawBegin(void)
 
 void Screen::DrawEnd(void)
 {
-	if(SDL_LockSurface(this->screenSurface) < 0)
+	if(SDL_LockSurface(this->frameBufferSurface) < 0)
 	{
 		return;
 	}
-	unsigned int* frameBuffer = reinterpret_cast<unsigned int*>(this->screenSurface->pixels);
+	unsigned int* frameBuffer = reinterpret_cast<unsigned int*>(this->frameBufferSurface->pixels);
+	int pitch = frameBufferSurface->pitch / sizeof(unsigned int);
 	if(this->color_mode == 8)
 	{
 		for(int y = 0; y < HEIGHT; ++ y)
@@ -134,7 +134,14 @@ void Screen::DrawEnd(void)
 			{
 				unsigned char color_index = screen_buffer[y * WIDTH + x];
 				unsigned int color = Screen::color_table[color_index];
-				frameBuffer[y * WIDTH + x] = color;
+				for(int yy = 0; yy < CONFIG_SCALE; ++ yy)
+				{
+					for(int xx = 0; xx < CONFIG_SCALE; ++ xx)
+					{
+						int index = ((y * CONFIG_SCALE) + yy) * pitch + ((x * CONFIG_SCALE) + xx);
+						frameBuffer[index] = color;
+					}
+				}
 			}
 		}
 	}
@@ -146,20 +153,19 @@ void Screen::DrawEnd(void)
 			for(int x = 0; x < WIDTH; ++ x)
 			{
 				unsigned short color = screen_buffer16[y * WIDTH + x];
-				frameBuffer[y * WIDTH + x] = Color16To32(color);
+				for(int yy = 0; yy < CONFIG_SCALE; ++ yy)
+				{
+					for(int xx = 0; xx < CONFIG_SCALE; ++ xx)
+					{
+						int index = ((y * CONFIG_SCALE) + yy) * pitch + ((x * CONFIG_SCALE) + xx);
+						frameBuffer[index] = Color16To32(color);
+					}
+				}
 			}
 		}
 	}
-	SDL_UnlockSurface(this->screenSurface);
-	SDL_UpdateRect(this->screenSurface, 0, 0, 0, 0);
-	SDL_Rect sourceRect = {
-		0, 0, WIDTH, HEIGHT
-	};
-	SDL_Rect destRect =
-	{
-		0, 0, WIDTH, HEIGHT
-	};
-	SDL_BlitSurface(this->screenSurface, &sourceRect, this->frameBufferSurface, &destRect);
+	SDL_UnlockSurface(this->frameBufferSurface);
+	SDL_UpdateRect(this->frameBufferSurface, 0, 0, 0, 0);
 	SDL_Flip(this->frameBufferSurface);
 }
 

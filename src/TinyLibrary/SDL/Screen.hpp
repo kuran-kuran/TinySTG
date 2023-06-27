@@ -53,11 +53,10 @@ private:
 	int color_mode;
 	unsigned char* screen_buffer;
 	int buffer_size;
+	int scaleWidth;
+	int scaleHeight;
 	static const unsigned int color_table[256];
-	//SDL_Window* window;
-	//SDL_Renderer* renderer;
 	SDL_Surface* frameBufferSurface;
-	SDL_Surface* screenSurface;
 };
 
 #endif

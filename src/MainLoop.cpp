@@ -70,6 +70,7 @@ bool MainLoop_Loop(void)
 	Global& global = Global::GetInstance();
 	Screen& screen = Screen::GetInstance();
 	Controller& controller = Controller::GetInstance();
+	controller.Update();
 	screen.Clear(global.back_color);
 	screen.DrawBegin();
 	unsigned int button = controller.GetButton();
@@ -267,7 +268,6 @@ bool MainLoop_Loop(void)
 	{
 		exit = true;
 	}
-	controller.Update();
 	screen.DrawEnd();
 	global.before_button = button;
 	return exit;

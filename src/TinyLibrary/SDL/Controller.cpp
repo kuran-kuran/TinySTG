@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string>
 #include "Controller.hpp"
-#include "Screen.hpp"
 
 Controller* Controller::controller = NULL;
 
@@ -60,7 +59,7 @@ void Controller::Reset(void)
 void Controller::Update(void)
 {
 	this->button = 0;
-#ifdef _WIN32e
+#ifdef _WIN32
 	if(SDL_JoystickGetButton(this->joystick, 0) != 0)
 	{
 		this->button |= BUTTON_1;
@@ -140,22 +139,41 @@ void Controller::Update(void)
 	}
 #else
 	const Uint8* state = SDL_GetKeyState(NULL);
-	std::string key;
-	for(int i = 0; i < SDLK_UNDO; ++ i)
+	if(state != NULL)
 	{
-		if(state[i] == 1)
+		if(state[SDLK_b] == 1)
 		{
-			char tmp[10];
-#ifdef _WIN32
-			sprintf_s(tmp, 10, "%d,", i);
-#else
-			sprintf(tmp, "%d,", i);
-#endif
-			key = key + tmp;
+			this->button |= BUTTON_1;
+		}
+		if(state[SDLK_a] == 1)
+		{
+			this->button |= BUTTON_2;
+		}
+		if(state[SDLK_s] == 1)
+		{
+			this->button |= BUTTON_START;
+		}
+		if(state[SDLK_k] == 1)
+		{
+			this->button |= BUTTON_SELECT;
+		}
+		if(state[SDLK_u] == 1)
+		{
+			this->button |= BUTTON_UP;
+		}
+		if(state[SDLK_d] == 1)
+		{
+			this->button |= BUTTON_DOWN;
+		}
+		if(state[SDLK_l] == 1)
+		{
+			this->button |= BUTTON_LEFT;
+		}
+		if(state[SDLK_r] == 1)
+		{
+			this->button |= BUTTON_RIGHT;
 		}
 	}
-	Screen& screen = Screen::GetInstance();
-	screen.DrawFont(0, 0, key.c_str());
 #endif
 }
 

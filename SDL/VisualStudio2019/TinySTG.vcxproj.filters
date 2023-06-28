@@ -172,6 +172,9 @@
     <ClInclude Include="..\..\src\TinyLibrary\SDL\TinyFile.hpp">
       <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\TinyLibrary\Report.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Boss1.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\TinyLibrary\SDL\TinyFile.cpp">
       <Filter>ソース ファイル\src\TinyLibrary\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TinyLibrary\Report.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

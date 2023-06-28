@@ -5,5 +5,6 @@
 #include "Mathmatics.hpp"
 #include "SoundMixer.hpp"
 #include "SoundPlayer.hpp"
+#include "Report.hpp"
 
 #endif

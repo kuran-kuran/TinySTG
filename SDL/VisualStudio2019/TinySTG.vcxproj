@@ -61,6 +61,7 @@
     <ClInclude Include="..\..\src\TinyLibrary\Font6x8.h" />
     <ClInclude Include="..\..\src\TinyLibrary\Font6x8_65536.h" />
     <ClInclude Include="..\..\src\TinyLibrary\Mathmatics.hpp" />
+    <ClInclude Include="..\..\src\TinyLibrary\Report.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL\Controller.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL\RingBuffer.hpp" />
     <ClInclude Include="..\..\src\TinyLibrary\SDL\Screen.hpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="..\..\src\Sound.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\AdpcmDecorder.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\Mathmatics.cpp" />
+    <ClCompile Include="..\..\src\TinyLibrary\Report.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL\Controller.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL\main.cpp" />
     <ClCompile Include="..\..\src\TinyLibrary\SDL\RingBuffer.cpp" />

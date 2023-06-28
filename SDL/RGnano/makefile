@@ -30,6 +30,7 @@ Shot.o \
 Sound.o \
 AdpcmDecorder.o \
 Mathmatics.o \
+Report.o \
 SoundMixer.o \
 SoundPlayer.o \
 Controller.o \
@@ -114,6 +115,9 @@ AdpcmDecorder.o: ../../src/TinyLibrary/AdpcmDecorder.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<
 
 Mathmatics.o: ../../src/TinyLibrary/Mathmatics.cpp
+	$(CC) -c $(CPPFLAG) $(INCDIR) $<
+
+Report.o: ../../src/TinyLibrary/Report.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<
 
 SoundMixer.o: ../../src/TinyLibrary/SoundMixer.cpp

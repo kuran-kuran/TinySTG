@@ -1,4 +1,4 @@
-#if defined(SDL2)
+#if defined(SDL)
 
 #include <string.h>
 #include <stdlib.h>

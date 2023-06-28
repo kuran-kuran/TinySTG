@@ -1,3 +1,5 @@
+#if defined(SDL2)
+
 #include <string.h>
 #include <stdlib.h>
 #include "RingBuffer.hpp"
@@ -191,3 +193,5 @@ size_t RingBuffer::GetBufferSize(void) const
 {
 	return this->buffersize;
 }
+
+#endif

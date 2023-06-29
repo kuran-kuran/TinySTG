@@ -23,7 +23,7 @@ ringBuffer()
 	SDL_AudioSpec obtained;
 	SDL_memset(&specs, 0, sizeof(specs));
 	specs.freq = frequency;
-	specs.format = AUDIO_U8;
+	specs.format = AUDIO_S16;
 	specs.channels = 1;
 	specs.samples = SOUND_BUFFER_SIZE / 2;
 	specs.callback = SoundStream::Callback;
@@ -109,23 +109,31 @@ int SoundStream::GetVolume(void)
 void SoundStream::Callback(void*, Uint8* stream, int len)
 {
 	SoundStream& sound_stream = SoundStream::GetInstance();
+	int lenHalf = len / 2;
 	int readableSize = static_cast<int>(sound_stream.ringBuffer.GetReadableSize());
-	unsigned char* buffer = new unsigned char[len];
-	memset(buffer, 0, len);
+	unsigned char* buffer = new unsigned char[lenHalf];
+	memset(buffer, 0, lenHalf);
 	int index = 0;
-	if(len > readableSize)
+	if(lenHalf > readableSize)
 	{
-		index = len - readableSize;
+		index = lenHalf - readableSize;
 	}
-	if(len < readableSize)
+	if(lenHalf < readableSize)
 	{
-		readableSize = len;
+		readableSize = lenHalf;
 	}
 	if(readableSize > 0)
 	{
 		sound_stream.ringBuffer.Read(&buffer[index], readableSize);
 	}
-	memcpy(stream, buffer, len);
+	short* shortBuffer = new short[lenHalf];
+	for(int i = 0; i < lenHalf; ++ i)
+	{
+		shortBuffer[i] = (static_cast<short>(buffer[i]) - 128) * 255;
+	}
+	memcpy(stream, shortBuffer, len);
+	delete [] shortBuffer;
+	delete [] buffer;
 }
 
 #endif

@@ -4,16 +4,19 @@
 #include <vector>
 #include "Dependent.hpp"
 
-static const bool ENABLE_LOG = false;
+//#define USE_OUTPUT_LOG
+//#define USE_SCREEN_REPORT
+#ifdef RGNANO
+static const char* LOGFILE = "/mnt/log.txt";
+#else
 static const char* LOGFILE = "log.txt";
-static const int REPORT_BUFFER_SPLIT_SIZE = 500;
+#endif
+
+static String reportText;
 
 void Report(const char* text, ...)
 {
-	if(ENABLE_LOG == false)
-	{
-		return;
-	}
+#ifdef USE_OUTPUT_LOG
 	TinyFile file;
 	file.Open(LOGFILE, TinyFile::ADD);
 	file.Seek(0, TinyFile::BOTTOM);
@@ -34,6 +37,7 @@ void Report(const char* text, ...)
 	output_text.push_back('\0');
 	va_end(arglist);
 	file.Write(&output_text[0], strlen(&output_text[0]));
+	reportText = &output_text[0];
 #elif defined(ARDUINO_SAMD_ZERO) && defined(CRYSTALLESS) && defined(USBCON)
 	std::vector<char> output_text(128);
 	va_list arglist;
@@ -51,6 +55,7 @@ void Report(const char* text, ...)
 	output_text.push_back('\0');
 	va_end(arglist);
 	file.Write(&output_text[0], strlen(&output_text[0]));
+	reportText = &output_text[0];
 #elif defined(ADAFRUIT_PYBADGE_M4_EXPRESS) || defined(ADAFRUIT_PYGAMER_M4_EXPRESS)
 	std::vector<char> output_text(128);
 	va_list arglist;
@@ -68,35 +73,31 @@ void Report(const char* text, ...)
 	output_text.push_back('\0');
 	va_end(arglist);
 	file.Write(&output_text[0], strlen(&output_text[0]));
+	reportText = &output_text[0];
 #else
 	char* output_text;
 	va_list arglist;
 	va_start(arglist, text);
 	vasprintf(&output_text, text, arglist);
 	va_end(arglist);
-	std::string output_text_string = output_text;
+	reportText = output_text;
+	file.Write(&output_text[0], strlen(&output_text[0]));
 	free(output_text);
-	std::string::size_type length = output_text_string.length();
-	if(length < REPORT_BUFFER_SPLIT_SIZE)
-	{
-		file.Write(output_text_string.c_str(), output_text_string.size());
-	}
-	else
-	{
-		std::string::size_type start = 0;
-		while(length > REPORT_BUFFER_SPLIT_SIZE)
-		{
-			std::string output(output_text_string, start, REPORT_BUFFER_SPLIT_SIZE);
-			file.Write(output.c_str(), output.size());
-			start += REPORT_BUFFER_SPLIT_SIZE;
-			length -= REPORT_BUFFER_SPLIT_SIZE;
-		}
-		if(length > 0)
-		{
-			std::string output(output_text_string, start, length);
-			file.Write(output.c_str(), output.size());
-		}
-	}
 #endif
 	file.Close();
+#endif
+}
+
+void ReportScreenUpdate(void)
+{
+#ifdef USE_OUTPUT_LOG
+#ifdef USE_SCREEN_REPORT
+	if(reportText.empty() == true)
+	{
+		return;
+	}
+	Screen& screen = Screen::GetInstance();
+	screen.DrawFont(0, 0, reportText.c_str());
+#endif
+#endif
 }

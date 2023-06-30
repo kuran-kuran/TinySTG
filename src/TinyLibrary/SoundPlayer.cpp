@@ -14,6 +14,7 @@ SoundPlayer::SoundPlayer(void)
 		this->buffer[i] = NULL;
 		this->size[i] = 0;
 		this->loop[i] = false;
+		this->type[i] = 0;
 	}
 }
 

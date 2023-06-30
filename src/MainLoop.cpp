@@ -268,6 +268,7 @@ bool MainLoop_Loop(void)
 	{
 		exit = true;
 	}
+	ReportScreenUpdate();
 	screen.DrawEnd();
 	global.before_button = button;
 	return exit;

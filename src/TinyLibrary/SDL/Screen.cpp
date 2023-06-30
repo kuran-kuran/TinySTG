@@ -450,6 +450,7 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 	{
 		y = HEIGHT - 8;
 	}
+	int xBase = x;
 	while(*output_text_temp != 0)
 	{
 		int index = static_cast<int>(static_cast<unsigned char>(*output_text_temp)) - 0x20;
@@ -461,6 +462,11 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 		int source_y = (index / 16) * 8;
 		DrawSprite(font, x, y, 6, 8, source_x, source_y, 96, 0);
 		x += 6;
+		if(x > WIDTH)
+		{
+			y += 8;
+			x = xBase;
+		}
 		++ output_text_temp;
 	}
 	free(output_text);

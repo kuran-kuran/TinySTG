@@ -76,7 +76,7 @@ https://daimonsoft.info/kuran_kuran/index.php?pyBadge/%E9%96%8B%E7%99%BA%E7%92%B
 ArduinoIDEでTinySTG.inoを読み込んでビルドする。  
 
 ### RaspberrryPI Pico + Waveshare19340版をビルド  
-- RaspberrryPI Pico SDKをインストールする。  
+- WindowsにRaspberrryPI Pico SDKをインストールする。  
 - SDK内にある「Developer Command Prompt for Pico」を起動する  
 ```
 > mkdir build

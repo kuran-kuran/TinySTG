@@ -8,6 +8,13 @@
 	#include "SDL2/SoundStream.hpp"
 	#include "SDL2/TinyFile.hpp"
 	#define String std::string
+#elif defined(SDL)
+	#include <string>
+	#include "SDL/Screen.hpp"
+	#include "SDL/Controller.hpp"
+	#include "SDL/SoundStream.hpp"
+	#include "SDL/TinyFile.hpp"
+	#define String std::string
 #elif defined(_WIN32)
 	#include <string>
 	#include "Windows/Screen.hpp"

@@ -5,6 +5,7 @@ Global* Global::global = NULL;
 
 Global::Global(void)
 :phase(PHASE_TUCHIKURE_LOGO)
+,before_phase(PHASE_TUCHIKURE_LOGO)
 ,back_color(0)
 ,before_button(0)
 ,game(NULL)
@@ -14,6 +15,7 @@ Global::Global(void)
 ,micros_time(0)
 ,interval_time(0)
 ,screen_flip_time(0)
+,quit_menu(false)
 {
 	this->gamedata.highscore = 10000;
 	this->gamedata.difficulty = 1;

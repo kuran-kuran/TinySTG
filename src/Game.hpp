@@ -126,6 +126,7 @@ private:
 	int score;
 	int highscore;
 	int enemy_move;
+	bool pause;
 };
 
 #endif

@@ -51,6 +51,7 @@ Game::Game(void)
 ,score(0)
 ,highscore(0)
 ,enemy_move(0)
+,pause(false)
 {
 	for(int i = 0; i < SHOT_MAX; ++ i)
 	{
@@ -156,6 +157,15 @@ bool Game::Update(void)
 {
 	Controller& controller = Controller::GetInstance();
 	unsigned int button = controller.GetButton();
+	if(!(this->before_button & Controller::BUTTON_START) && (button & Controller::BUTTON_START))
+	{
+		this->pause = this->pause == true ? false : true;
+	}
+	if(this->pause == true)
+	{
+		this->before_button = button;
+		return false;
+	}
 	this->player.Update();
 	unsigned int status = this->player.GetStatus();
 	int fighter_x = 0;
@@ -569,6 +579,10 @@ void Game::Draw(void)
 	if(this->gameover == true)
 	{
 		screen.DrawFont(Screen::CENTER, 16, "GAME OVER");
+	}
+	if(this->pause == true)
+	{
+		screen.DrawFont(Screen::CENTER, Screen::CENTER, "PAUSE");
 	}
 	int score = this->score;
 	if(score > 99999999)

@@ -118,6 +118,7 @@ void SoundStream::Callback(void *, Uint8 * stream, int len)
 		sound_stream.ringBuffer.Read(&buffer[index], readableSize);
 	}
 	memcpy(stream, buffer, len);
+	delete [] buffer;
 }
 
 #endif

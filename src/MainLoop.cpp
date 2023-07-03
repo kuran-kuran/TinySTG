@@ -5,6 +5,12 @@
 #include "Global.hpp"
 #include "Sound.hpp"
 
+#ifdef RGNANO
+static const char* SAVEFILE = "/mnt/TinySTG.sav";
+#else
+static const char* SAVEFILE = "TinySTG/TinySTG.sav";
+#endif
+
 void MainLoop_Setup(void)
 {
 	Global::Initialize();
@@ -16,20 +22,10 @@ void MainLoop_Setup(void)
 	global.back_color = 0;
 	global.before_button = 1;
 	global.count = 0;
+	global.quit_menu = false;
 	// ゲームデータ読み込み
 	TinyFile file;
-	if(file.Open("TinySTG/TinySTG.sav", TinyFile::READ) == true)
-	{
-		memset(&global.gamedata, 0, sizeof(global.gamedata));
-		size_t size = file.GetSize();
-		file.Read(&global.gamedata, size);
-		file.Close();
-		if(size == (sizeof(int) * 3))
-		{
-			global.gamedata.volume = 10;
-		}
-	}
-	else if(file.Open("gamedata.bin", TinyFile::READ) == true)
+	if(file.Open(SAVEFILE, TinyFile::READ) == true)
 	{
 		memset(&global.gamedata, 0, sizeof(global.gamedata));
 		size_t size = file.GetSize();
@@ -153,7 +149,7 @@ bool MainLoop_Loop(void)
 			global.phase = Global::PHASE_INITIALIZE_GAME;
 			// ゲームデータ書き込み
 			TinyFile file;
-			if(file.Open("TinySTG/TinySTG.sav", TinyFile::WRITE) == true)
+			if(file.Open(SAVEFILE, TinyFile::WRITE) == true)
 			{
 				file.Write(&global.gamedata, sizeof(global.gamedata));
 				file.Close();
@@ -256,18 +252,69 @@ bool MainLoop_Loop(void)
 			global.phase = Global::PHASE_TUCHIKURE_LOGO;
 			// ゲームデータ書き込み
 			TinyFile file;
-			if(file.Open("TinySTG/TinySTG.sav", TinyFile::WRITE) == true)
+			if(file.Open(SAVEFILE, TinyFile::WRITE) == true)
 			{
 				file.Write(&global.gamedata, sizeof(global.gamedata));
 				file.Close();
 			}
 		}
 		break;
+	case Global::PHASE_QUIT_MENU:
+		if(global.quit_menu == true)
+		{
+			screen.DrawRectangle(22, 26, 6 * 3, 8, 9);
+		}
+		else
+		{
+			screen.DrawRectangle(22 + 6 * 4, 26, 8 * 2, 8, 9);
+		}
+		screen.DrawFont(Screen::CENTER, 16, "Quit?");
+		screen.DrawFont(22, 26, "Yes/No");
+		if(button & Controller::BUTTON_LEFT)
+		{
+			global.quit_menu = true;
+		}
+		if(button & Controller::BUTTON_RIGHT)
+		{
+			global.quit_menu = false;
+		}
+		if((button & Controller::BUTTON_1) || (button & Controller::BUTTON_2))
+		{
+			if(global.quit_menu == true)
+			{
+				exit = true;
+			}
+			else
+			{
+				global.quit_menu_wait_counter = Screen::FPS / 3;
+				global.phase = Global::PHASE_QUIT_MENU_WAIT;
+			}
+		}
+		break;
+	case Global::PHASE_QUIT_MENU_WAIT:
+		-- global.quit_menu_wait_counter;
+		if(global.quit_menu_wait_counter <= 0)
+		{
+			global.phase = global.before_phase;
+		}
+		break;
 	}
-	if((button & Controller::BUTTON_START) && (button & Controller::BUTTON_SELECT))
+	if(global.phase < Global::PHASE_QUIT_MENU)
 	{
-		exit = true;
+		if((button & Controller::BUTTON_START) && (button & Controller::BUTTON_SELECT))
+		{
+			global.before_phase = global.phase;
+			global.quit_menu = false;
+			global.phase = Global::PHASE_QUIT_MENU;
+		}
+		else if(button & Controller::BUTTON_QUIT)
+		{
+			global.before_phase = global.phase;
+			global.quit_menu = false;
+			global.phase = Global::PHASE_QUIT_MENU;
+		}
 	}
+	ReportScreenUpdate();
 	screen.DrawEnd();
 	global.before_button = button;
 	return exit;

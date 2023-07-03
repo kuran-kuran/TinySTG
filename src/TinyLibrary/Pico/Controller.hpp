@@ -25,6 +25,11 @@ public:
 		BUTTON_2 = 0x20,
 		BUTTON_SELECT = 0x40,
 		BUTTON_START = 0x80,
+		BUTTON_3 = 0x100,
+		BUTTON_4 = 0x200,
+		BUTTON_L = 0x400,
+		BUTTON_R = 0x800,
+		BUTTON_QUIT = 0x1000,
 		// Threshold
 		DIR_THRESHOLD = 250,
 	};

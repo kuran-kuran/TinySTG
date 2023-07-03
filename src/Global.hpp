@@ -14,6 +14,8 @@ public:
 		PHASE_TITLE,
 		PHASE_INITIALIZE_GAME,
 		PHASE_GAME,
+		PHASE_QUIT_MENU,
+		PHASE_QUIT_MENU_WAIT
 	};
 	struct GameData
 	{
@@ -29,6 +31,7 @@ public:
 	static void Initialize(void);
 	static void Finalize(void);
 	int phase;
+	int before_phase;
 	unsigned char back_color;
 	unsigned int before_button;
 	Game* game;
@@ -39,6 +42,8 @@ public:
 	unsigned long micros_time;
 	unsigned long interval_time;
 	unsigned long screen_flip_time;
+	bool quit_menu;
+	int quit_menu_wait_counter;
 private:
 	Global(Global&);
 	Global& operator = (Global&);

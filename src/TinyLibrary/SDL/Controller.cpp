@@ -115,6 +115,14 @@ void Controller::Update(void)
 		{
 			this->button |= BUTTON_2;
 		}
+		if(state[SDLK_q] == 1)
+		{
+			this->button |= BUTTON_QUIT;
+		}
+		if(state[SDLK_s] == 1)
+		{
+			this->button |= BUTTON_START;
+		}
 		if(state[SDLK_SPACE] == 1)
 		{
 			this->button |= BUTTON_START;
@@ -148,6 +156,26 @@ void Controller::Update(void)
 		if(state[SDLK_a] == 1)
 		{
 			this->button |= BUTTON_2;
+		}
+		if(state[SDLK_y] == 1)
+		{
+			this->button |= BUTTON_3;
+		}
+		if(state[SDLK_x] == 1)
+		{
+			this->button |= BUTTON_4;
+		}
+		if(state[SDLK_m] == 1)
+		{
+			this->button |= BUTTON_L;
+		}
+		if(state[SDLK_n] == 1)
+		{
+			this->button |= BUTTON_R;
+		}
+		if(state[SDLK_q] == 1)
+		{
+			this->button |= BUTTON_QUIT;
 		}
 		if(state[SDLK_s] == 1)
 		{

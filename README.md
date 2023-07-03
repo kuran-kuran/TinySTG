@@ -32,18 +32,18 @@ $ make
 ```
 
 ### RG Nano(FunKeyOS)版(SDL1.2)をビルド
-- LinuxにFunKeyOSの開発環境を作成する。
-https://daimonsoft.info/kuran_kuran/index.php?RG%20Nano/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83 
+- LinuxにFunKeyOSの開発環境を作成する。  
+https://daimonsoft.info/kuran_kuran/index.php?RG%20Nano/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83
 - 以下を実行してビルドする
 ```
 $ cd TinySTG/SDL/RGnano
 $ make
 ```
-- OpenPackage Creatorでopkファイルを作成する~
-Windows上に「TinySTG_exe」フォルダを作成する。~
-TinySTG_exeフォルダの中に「TinySTG」フォルダを作成して「bgm.adp」と「TinySTG.png」をコピーする。~
+- OpenPackage Creatorでopkファイルを作成する
+Windows上に「TinySTG_exe」フォルダを作成する。
+TinySTG_exeフォルダの中に「TinySTG」フォルダを作成して「bgm.adp」と「TinySTG.png」をコピーする。
 TinySTG_exeフォルダの中にLinuxでビルドした「TinySTG_exe」ファイルをコピーする。
-TinySTG_exeフォルダの中に「TinySTG.funkey-s.desktop 」ファイルを作成して以下の内容に編集する。~
+TinySTG_exeフォルダの中に「TinySTG.funkey-s.desktop 」ファイルを作成して以下の内容に編集する。
 ```
 [Desktop Entry]
 Name=TinySTG
@@ -66,13 +66,13 @@ WindowsでOpenPackage Creatorを起動して「TinySTG_exe」フォルダをド�
 packボタンを押してopkファイルを作成する。
 
 ### TinyArcade版をビルド
-ArduinoIDEをインストールして以下の設定をする。
-https://daimonsoft.info/kuran_kuran/index.php?TinyArcade/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB
+ArduinoIDEをインストールして以下の設定をする。  
+https://daimonsoft.info/kuran_kuran/index.php?TinyArcade/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB  
 ArduinoIDEでTinySTG.inoを読み込んでビルドする。
 
 ### PyBadge版をビルド
-ArduinoIDEをインストールして以下の設定をする。
-https://daimonsoft.info/kuran_kuran/index.php?pyBadge/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%28Arduino%20IDE%29
+ArduinoIDEをインストールして以下の設定をする。  
+https://daimonsoft.info/kuran_kuran/index.php?pyBadge/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%28Arduino%20IDE%29  
 ArduinoIDEでTinySTG.inoを読み込んでビルドする。
 
 ### RaspberrryPI Pico + Waveshare19340版をビルド

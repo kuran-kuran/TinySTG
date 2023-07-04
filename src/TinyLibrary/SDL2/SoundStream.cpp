@@ -117,6 +117,14 @@ void SoundStream::Callback(void *, Uint8 * stream, int len)
 	{
 		sound_stream.ringBuffer.Read(&buffer[index], readableSize);
 	}
+	for(int i = 0; i < readableSize; ++ i)
+	{
+		if(sound_stream.volume < 8)
+		{
+			int volume_shift = (8 - sound_stream.volume);
+			buffer[i] =  buffer[i] >> volume_shift;
+		}
+	}
 	memcpy(stream, buffer, len);
 	delete [] buffer;
 }

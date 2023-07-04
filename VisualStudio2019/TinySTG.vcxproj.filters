@@ -184,6 +184,9 @@
     <ClInclude Include="..\Config.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\TinyLibrary\Report.hpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\TinyLibrary\Windows\WinMain.cpp">
@@ -277,6 +280,9 @@
       <Filter>ソース ファイル\src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\TinyLibrary\AdpcmDecorder.cpp">
+      <Filter>ソース ファイル\src\TinyLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TinyLibrary\Report.cpp">
       <Filter>ソース ファイル\src\TinyLibrary</Filter>
     </ClCompile>
   </ItemGroup>

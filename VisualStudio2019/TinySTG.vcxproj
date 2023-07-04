@@ -64,6 +64,7 @@
     <ClInclude Include="..\src\TinyLibrary\Font6x8.h" />
     <ClInclude Include="..\src\TinyLibrary\Font6x8_65536.h" />
     <ClInclude Include="..\src\TinyLibrary\Mathmatics.hpp" />
+    <ClInclude Include="..\src\TinyLibrary\Report.hpp" />
     <ClInclude Include="..\src\TinyLibrary\SoundMixer.hpp" />
     <ClInclude Include="..\src\TinyLibrary\SoundPlayer.hpp" />
     <ClInclude Include="..\src\TinyLibrary\TinyLibrary.hpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="..\src\Sound.cpp" />
     <ClCompile Include="..\src\TinyLibrary\AdpcmDecorder.cpp" />
     <ClCompile Include="..\src\TinyLibrary\Mathmatics.cpp" />
+    <ClCompile Include="..\src\TinyLibrary\Report.cpp" />
     <ClCompile Include="..\src\TinyLibrary\SoundMixer.cpp" />
     <ClCompile Include="..\src\TinyLibrary\SoundPlayer.cpp" />
     <ClCompile Include="..\src\TinyLibrary\Windows\Controller.cpp" />

@@ -31,14 +31,6 @@ ringBuffer()
 		throw "Error: SDL_OpenAudio";
 	}
 	SDL_PauseAudio(0);
-#if 0
-	this->audioDeviceID = SDL_OpenAudioDevice(nullptr, PLAYBACK_DEV, &specs, nullptr, 0);
-	if(this->audioDeviceID == 0)
-	{
-		throw "Error: SDL_OpenAudioDevice";
-	}
-	SDL_PauseAudioDevice(this->audioDeviceID, 0);
-#endif
 }
 
 SoundStream::~SoundStream(void)
@@ -129,7 +121,16 @@ void SoundStream::Callback(void*, Uint8* stream, int len)
 	short* shortBuffer = new short[lenHalf];
 	for(int i = 0; i < lenHalf; ++ i)
 	{
-		shortBuffer[i] = (static_cast<short>(buffer[i]) - 128) * 255;
+		if (sound_stream.volume >= 8)
+		{
+			int volume_shift = 0;
+			shortBuffer[i] = (static_cast<short>(buffer[i]) - 128) * 255;
+		}
+		else
+		{
+			int volume_shift = (8 - sound_stream.volume);
+			shortBuffer[i] = (static_cast<short>(buffer[i] >> volume_shift) - 128) * 255;
+		}
 	}
 	memcpy(stream, shortBuffer, len);
 	delete [] shortBuffer;

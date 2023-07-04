@@ -22,6 +22,8 @@ Global::Global(void)
 	this->gamedata.sound = 1;
 #if defined(ADAFRUIT_PYBADGE_M4_EXPRESS) || defined(ADAFRUIT_PYGAMER_M4_EXPRESS)
 	this->gamedata.volume = 7;
+#elif defined(_WIN32)
+	this->gamedata.volume = 8;
 #else
 	this->gamedata.volume = 10;
 #endif

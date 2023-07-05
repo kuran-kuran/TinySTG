@@ -65,6 +65,23 @@ WindowsでOpenPackage Creatorを起動して「TinySTG_exe」フォルダをド�
 ダイアログが表示されるので「Use existing as is」を選択する。  
 packボタンを押してopkファイルを作成する。  
 
+### RG Nano(AnbernicOS/FunKeyOS)版(SDL1.2)をビルド  
+- Linuxにmiyooの開発環境を作成する。  
+https://github.com/MiyooCFW/toolchain/releases/download/v2.0.0/miyoo-toolchain-v2.0.0-arm-buildroot-linux-musleabi_sdk-buildroot.tar.gz  
+```
+$ cd ~
+$ wget https://github.com/MiyooCFW/toolchain/releases/download/v2.0.0/miyoo-toolchain-v2.0.0-arm-buildroot-linux-musleabi_sdk-buildroot.tar.gz
+$ cd /opt/
+$ sudo tar -zxvf ~/miyoo-toolchain-v2.0.0-arm-buildroot-linux-musleabi_sdk-buildroot.tar.gz
+$ sudo mv arm-buildroot-linux-musleabi_sdk-buildroot miyoo
+```
+- 以下を実行してビルドする  
+```
+$ cd TinySTG/SDL/RGnano-miyoo
+$ make
+```
+あとは下のRG Nano(FunKeyOS)版(SDL1.2)をビルドと同じです。  
+
 ### TinyArcade版をビルド
 ArduinoIDEをインストールして以下の設定をする。  
 https://daimonsoft.info/kuran_kuran/index.php?TinyArcade/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB  

@@ -1,5 +1,7 @@
-CC = arm-funkey-linux-musleabihf-gcc.br_real
-CPPFLAG = -lSDL -D SDL -D RGNANO -lstdc++
+CHAINPREFIX= /opt/miyoo/
+CROSS_COMPILE=$(CHAINPREFIX)/bin/arm-buildroot-linux-musleabi-
+CC = $(CROSS_COMPILE)g++
+CPPFLAG = -static -lstdc++ -lSDL -lasound -D SDL -D RGNANO
 LIBS = 
 INCDIR = 
 LIBDIR = 

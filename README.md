@@ -68,7 +68,7 @@ WindowsでOpenPackage Creatorを起動して「TinySTG_exe」フォルダをド�
 ダイアログが表示されるので「Use existing as is」を選択する。  
 packボタンを押してopkファイルを作成する。  
 
-### RG Nano(AnbernicOS/FunKeyOS)版(SDL1.2)をビルド  
+### RG Nano(AnbernicOS)版(SDL1.2)をビルド  
 - Linuxにmiyooの開発環境を作成する。  
 https://github.com/MiyooCFW/toolchain/releases/download/v2.0.0/miyoo-toolchain-v2.0.0-arm-buildroot-linux-musleabi_sdk-buildroot.tar.gz  
 ```

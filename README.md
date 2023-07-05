@@ -57,10 +57,10 @@ Categories=applications
 ```
 opkファイルを作成するためのフォルダ構成  
 ```
-+\TinySTG_exe (フォルダ)
++\TinySTG_funkey-s (フォルダ)
 |+-\TinySTG (リソース用フォルダ)
 |  +- bgm.adp (ADPCM形式のBGMファイル)
-+- TinySTG_exe (実行ファイル)
++- TinySTG_funkey-s (実行ファイル)
 +- TinySTG.png (アイコンファイル)
 +- TinySTG.funkey-s.desktop (FunkeyOS用設定ファイル)
 ```
@@ -104,6 +104,16 @@ ArduinoIDEでTinySTG.inoを読み込んでビルドする。
 > cmake -G "NMake Makefiles" ..
 > nmake
 ```
+opkファイルを作成するためのフォルダ構成  
+```
++\TinySTG_anbernic (フォルダ)
+|+-\TinySTG (リソース用フォルダ)
+|  +- bgm.adp (ADPCM形式のBGMファイル)
++- TinySTG_anbernic (実行ファイル)
++- TinySTG.png (アイコンファイル)
++- TinySTG.anbernic.desktop (FunkeyOS用設定ファイル)
+```
+
 ## ライセンス
 TinySTGはMIT Licenseとします。  
 SDL 2.0はzlibライセンス, SDL 1.2はGNU LGPLライセンスです。  

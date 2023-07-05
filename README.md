@@ -4,6 +4,7 @@
 https://github.com/kuran-kuran/TinySTG
 
 ## ダウンロード
+RG Nano版
 https://github.com/kuran-kuran/TinySTG/releases  
 
 ## はじめに

@@ -83,6 +83,15 @@ $ sudo mv arm-buildroot-linux-musleabi_sdk-buildroot miyoo
 $ cd TinySTG/SDL/RGnano-miyoo
 $ make
 ```
+opkファイルを作成するためのフォルダ構成  
+```
++\TinySTG_anbernic (フォルダ)
+|+-\TinySTG (リソース用フォルダ)
+|  +- bgm.adp (ADPCM形式のBGMファイル)
++- TinySTG_anbernic (実行ファイル)
++- TinySTG.png (アイコンファイル)
++- TinySTG.anbernic.desktop (FunkeyOS用設定ファイル)
+```
 あとは上のRG Nano(FunKeyOS)版(SDL1.2)をビルドと同じです。  
 
 ### TinyArcade版をビルド
@@ -103,15 +112,6 @@ ArduinoIDEでTinySTG.inoを読み込んでビルドする。
 > cd build
 > cmake -G "NMake Makefiles" ..
 > nmake
-```
-opkファイルを作成するためのフォルダ構成  
-```
-+\TinySTG_anbernic (フォルダ)
-|+-\TinySTG (リソース用フォルダ)
-|  +- bgm.adp (ADPCM形式のBGMファイル)
-+- TinySTG_anbernic (実行ファイル)
-+- TinySTG.png (アイコンファイル)
-+- TinySTG.anbernic.desktop (FunkeyOS用設定ファイル)
 ```
 
 ## ライセンス

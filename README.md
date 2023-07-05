@@ -80,7 +80,7 @@ $ sudo mv arm-buildroot-linux-musleabi_sdk-buildroot miyoo
 $ cd TinySTG/SDL/RGnano-miyoo
 $ make
 ```
-あとは下のRG Nano(FunKeyOS)版(SDL1.2)をビルドと同じです。  
+あとは上のRG Nano(FunKeyOS)版(SDL1.2)をビルドと同じです。  
 
 ### TinyArcade版をビルド
 ArduinoIDEをインストールして以下の設定をする。  

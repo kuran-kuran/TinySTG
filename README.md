@@ -3,6 +3,9 @@
 
 https://github.com/kuran-kuran/TinySTG
 
+## ダウンロード
+https://github.com/kuran-kuran/TinySTG/releases/tag/1.0.0  
+
 ## はじめに
 TinyArcade、PyBadge、Windows10、Linux、RaspberryPI OS、RGNano(FunKeyOS)、Waveshare19340 を接続した RaspberryPI Picoで動作します。  
 Waveshare19340 を接続した RaspberryPI Pico ではまだ画面サイズの調整がまだだったり音が出なかったりするためテスト版になっています。  

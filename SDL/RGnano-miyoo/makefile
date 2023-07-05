@@ -42,7 +42,7 @@ TinyFile.o \
 RingBuffer.o
 
 $(TARGET): $(OBJS)
-	$(CC) -o TinySTG_exe/$@ $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
+	$(CC) -o TinySTG_anbernic/TinySTG_anbernic $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
 
 main.o: ../../src/TinyLibrary/SDL/main.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<

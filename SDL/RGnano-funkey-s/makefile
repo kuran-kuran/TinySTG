@@ -3,7 +3,7 @@ CPPFLAG = -lSDL -D SDL -D RGNANO -lstdc++
 LIBS = 
 INCDIR = 
 LIBDIR = 
-TARGET = TinySTG_exe
+TARGET = TinySTG_funkey-s
 
 OBJS = main.o \
 Boss1.o \
@@ -40,7 +40,7 @@ TinyFile.o \
 RingBuffer.o
 
 $(TARGET): $(OBJS)
-	$(CC) -o TinySTG_exe/$@ $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
+	$(CC) -o TinySTG_funkey-s/$@ $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
 
 main.o: ../../src/TinyLibrary/SDL/main.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<

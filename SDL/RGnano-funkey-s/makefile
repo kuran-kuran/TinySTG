@@ -40,7 +40,7 @@ TinyFile.o \
 RingBuffer.o
 
 $(TARGET): $(OBJS)
-	$(CC) -o TinySTG_funkey-s/$@ $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
+	$(CC) -o $@/$@ $^ $(CPPFLAG) $(LIBDIR) $(LIBS)
 
 main.o: ../../src/TinyLibrary/SDL/main.cpp
 	$(CC) -c $(CPPFLAG) $(INCDIR) $<

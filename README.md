@@ -7,7 +7,19 @@ https://github.com/kuran-kuran/TinySTG
 RG Nano版
 https://github.com/kuran-kuran/TinySTG/releases  
 
-## はじめに
+## 対応OS
+- 公式AnbernicOS (v1.0.1で確認)  
+- FunKeyOS (v2.3.0で確認)  
+- FunKeyOS-game_de_it (v2.0.2で確認)  
+
+## インストール方法
+SDカードのApplicationsフォルダにTinySTG.opkをコピーしてください。  
+
+## 遊び方
+タイトル画面では左右ボタンで難易度を選択、上下ボタンで音量を設定できます。ボタンを押すとゲーム開始です。  
+電源ボタンを押すと終了メニューが表示されます。Yesを選ぶとゲーム終了、Noを選ぶとゲームが続行します。  
+
+## プログラムについて
 TinyArcade、PyBadge、Windows10、Linux、RaspberryPI OS、RGNano(FunKeyOS)、Waveshare19340 を接続した RaspberryPI Picoで動作します。  
 Waveshare19340 を接続した RaspberryPI Pico ではまだ画面サイズの調整がまだだったり音が出なかったりするためテスト版になっています。  
 

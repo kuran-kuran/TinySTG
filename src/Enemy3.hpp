@@ -13,10 +13,10 @@ public:
 		WIDTH_HALF = WIDTH / 2,
 		HEIGHT_HALF = HEIGHT / 2,
 		LEFT_LIMIT = -WIDTH,
-		RIGHT_LIMIT = (Screen::WIDTH + WIDTH_HALF) << 10,
 		TOP_LIMIT = -HEIGHT,
-		BOTTOM_LIMIT = (Screen::HEIGHT + HEIGHT_HALF) << 10,
 	};
+	static int RIGHT_LIMIT;
+	static int BOTTOM_LIMIT;
 	Enemy3(void);
 	~Enemy3(void);
 	void Initialize(int type, int x, int y);

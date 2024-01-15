@@ -13,13 +13,13 @@ public:
 		HEIGHT = 10 << 10,
 		WIDTH_HALF = WIDTH / 2,
 		HEIGHT_HALF = HEIGHT / 2,
-		START_X = (Screen::WIDTH / 2 - 5) << 10,
-		START_Y = (Screen::HEIGHT - 19) << 10,
-		START_TAKEOFF_Y = (Screen::HEIGHT + 6) << 10,
+//		START_X = (Screen::WIDTH / 2 - 5) << 10,
+//		START_Y = (Screen::HEIGHT - 19) << 10,
+//		START_TAKEOFF_Y = (Screen::HEIGHT + 6) << 10,
+//		LIMIT_X = (Screen::WIDTH << 10) - WIDTH_HALF,
+//		LIMIT_Y = (Screen::HEIGHT << 10) - HEIGHT_HALF,
 		SPEED = 1 << 10,
 		SPEED_ASLANT = (SPEED >> 10) * 724,
-		LIMIT_X = (Screen::WIDTH << 10) - WIDTH_HALF,
-		LIMIT_Y = (Screen::HEIGHT << 10) - HEIGHT_HALF,
 		// Shot
 		SHOT_UP_MAX = 8,
 		SHOT_COOL_TIME = 8,
@@ -32,6 +32,11 @@ public:
 		PHASE_MOVE,
 		PHASE_WAIT,
 	};
+	static int START_X;
+	static int START_Y;
+	static int START_TAKEOFF_Y;
+	static int LIMIT_X;
+	static int LIMIT_Y;
 	Player(void);
 	~Player(void);
 	void Initialize(void);

@@ -33,6 +33,7 @@ public:
 	void Write(const void* buffer, size_t size);
 	void Seek(long offset, unsigned int position);
 	long Tell(void);
+	static void SetCurrentPath(const char* assetsPath);
 	static size_t GetLoadSize(const char* filepath);
 	static bool Load(void* buffer, const char* filepath);
 	static bool Exist(const char* filepath);

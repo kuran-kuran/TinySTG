@@ -102,6 +102,11 @@ long TinyFile::Tell(void)
 	return 0;
 }
 
+// カレントディレクトリを設定する
+void TinyFile::SetCurrentPath(const char* assetsPath)
+{
+}
+
 size_t TinyFile::GetLoadSize(const char* filepath)
 {
 #if false

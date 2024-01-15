@@ -13,13 +13,13 @@ public:
 		WIDTH_HALF = WIDTH / 2,
 		HEIGHT_HALF = HEIGHT / 2,
 		LEFT_LIMIT = WIDTH_HALF,
-		RIGHT_LIMIT = (Screen::WIDTH << 10) - WIDTH_HALF,
 		TOP_LIMIT = HEIGHT_HALF,
-		BOTTOM_LIMIT = (Screen::HEIGHT << 10) - HEIGHT_HALF,
 		// Collision
 		PLAYER_COLLISION_WIDTH = 7 << 10,
 		PLAYER_COLLISION_HEIGHT = 7 << 10,
 	};
+	static int RIGHT_LIMIT;
+	static int BOTTOM_LIMIT;
 	PowerUp(void);
 	~PowerUp(void);
 	void Initialize(int type, int x, int y);

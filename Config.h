@@ -21,7 +21,7 @@
 // Windows setting
 #define CONFIG_FPS 60
 #define CONFIG_WIDTH 80
-#define CONFIG_HEIGHT 64
+#define CONFIG_HEIGHT 80
 #define CONFIG_TITLE L"TinySTG"
 
 #elif defined(ARDUINO_SAMD_ZERO) && defined(CRYSTALLESS) && defined(USBCON)

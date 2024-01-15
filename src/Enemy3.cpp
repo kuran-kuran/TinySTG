@@ -4,10 +4,15 @@
 #include "Enemy3.hpp"
 #include "Global.hpp"
 
+int Enemy3::RIGHT_LIMIT;
+int Enemy3::BOTTOM_LIMIT;
+
 Enemy3::Enemy3(void)
 :turn_count(50)
 ,turn(false)
 {
+	Enemy3::RIGHT_LIMIT = (Screen::WIDTH + WIDTH_HALF) << 10;
+	Enemy3::BOTTOM_LIMIT = (Screen::HEIGHT + HEIGHT_HALF) << 10;
 }
 
 Enemy3::~Enemy3(void)

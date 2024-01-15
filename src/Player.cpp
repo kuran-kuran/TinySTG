@@ -5,6 +5,12 @@
 #include "Global.hpp"
 #include "Bullet.hpp"
 
+int Player::START_X;
+int Player::START_Y;
+int Player::START_TAKEOFF_Y;
+int Player::LIMIT_X;
+int Player::LIMIT_Y;
+
 Player::Player(void)
 :x(START_X)
 ,y(START_TAKEOFF_Y)
@@ -19,6 +25,11 @@ Player::Player(void)
 ,before_bomber(false)
 ,bomber(2)
 {
+	Player::START_X =(Screen::WIDTH / 2 - 5) << 10;
+	Player::START_Y = (Screen::HEIGHT - 19) << 10;
+	Player::START_TAKEOFF_Y = (Screen::HEIGHT + 6) << 10;
+	Player::LIMIT_X = (Screen::WIDTH << 10) - WIDTH_HALF;
+	Player::LIMIT_Y = (Screen::HEIGHT << 10) - HEIGHT_HALF;
 }
 
 Player::~Player(void)

@@ -2,6 +2,21 @@
 
 #include "TinyFile.hpp"
 
+#if defined(_WIN32)
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <Windows.h>
+#include <shlwapi.h>
+#pragma comment(lib, "shlwapi.lib")
+#elif defined(SDL) || defined(SDL2)
+#include <limits.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <libgen.h>
+#endif
+
 TinyFile::TinyFile(void)
 :file(NULL)
 ,filesize(0)
@@ -132,6 +147,48 @@ size_t TinyFile::GetSize(void) const
 long TinyFile::Tell(void)
 {
 	return ftell(this->file);
+}
+
+// カレントディレクトリを設定する
+void TinyFile::SetCurrentPath(const char* assetsPath)
+{
+#if defined(_WIN32)
+	struct stat statBuffer;
+	if((stat(assetsPath, &statBuffer) == 0) && (statBuffer.st_mode & _S_IFDIR))
+	{
+		// 指定のアセットがあるのでカレントディレクトリはそのまま
+		return;
+	}
+	char path[MAX_PATH];
+	if (GetModuleFileNameA(NULL, path, MAX_PATH) == 0)
+	{
+		return;
+	}
+	char drive[MAX_PATH];
+	char dir[MAX_PATH];
+	char filename[MAX_PATH];
+	char ext[MAX_PATH];
+	_splitpath_s(path, drive, MAX_PATH, dir, MAX_PATH, filename, MAX_PATH, ext, MAX_PATH);
+	char* exepath = PathCombineA(path, drive, dir);
+	SetCurrentDirectoryA(exepath);
+#else
+	struct stat statBuffer;
+	if((stat(assetsPath, &statBuffer) == 0) && (statBuffer.st_mode & S_IFDIR))
+	{
+		// 指定のアセットがあるのでカレントディレクトリはそのまま
+		return;
+	}
+	// 実行ファイルのパス取得
+	char path[PATH_MAX + 1];
+	char link[PATH_MAX + 1];
+	snprintf(link, PATH_MAX, "/proc/%d/exe", getpid());
+	int len = readlink(link, path, PATH_MAX);
+	path[len] = '\0';
+	// 実行ファイルのあるディレクトリ取得
+	char* dirName = dirname(path);
+	// カレントディレクトリを実行ファイルのあるディレクトリに設定
+	chdir(dirName);
+#endif
 }
 
 size_t TinyFile::GetLoadSize(const char* filepath)

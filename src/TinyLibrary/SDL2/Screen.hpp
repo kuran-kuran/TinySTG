@@ -16,8 +16,6 @@ public:
 	enum
 	{
 		FPS = CONFIG_FPS,
-		WIDTH = CONFIG_WIDTH,
-		HEIGHT = CONFIG_HEIGHT,
 		SCALE = 1,
 		CENTER = -1,
 		LEFT = -2,
@@ -26,6 +24,8 @@ public:
 		BOTTOM = -5
 	};
 	static Screen* screen;
+	static int WIDTH;
+	static int HEIGHT;
 	Screen(int color_mode);
 	~Screen(void);
 	static void Initialize(int color_mode);

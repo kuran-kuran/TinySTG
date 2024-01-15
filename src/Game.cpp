@@ -38,7 +38,7 @@ Game::Game(void)
 ,bullet_rate_interval(100)
 ,bullet_rate_interval_count(100)
 ,item_interval(ITEM_INTERVAL)
-,bg_y((384 - 64) << 10)
+,bg_y((384 - Screen::HEIGHT) << 10)
 ,draw_stage(0)
 ,draw_warning(0)
 ,difficulty(0)
@@ -514,7 +514,7 @@ void Game::Draw(void)
 	const ImageData* image_data = GetImageData(BG);
 	const unsigned char* buffer = reinterpret_cast<const unsigned char*>(image_data->buffer) + ((static_cast<size_t>(this->bg_y >> 10)) * 96);
 	int draw_x = (Screen::WIDTH - image_data->width) / 2;
-	screen.DrawSprite(buffer, draw_x, 0, image_data->width, 64, -1);
+	screen.DrawSprite(buffer, draw_x, 0, image_data->width, Screen::HEIGHT, -1);
 	for(int i = 0; i < ENEMY_MAX; ++ i)
 	{
 		if(this->enemy[i] == NULL)

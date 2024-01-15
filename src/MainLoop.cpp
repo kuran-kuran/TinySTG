@@ -17,6 +17,7 @@ void MainLoop_Setup(void)
 	Screen::Initialize(8);
 	Controller::Initialize();
 	Sound::Initialize();
+	TinyFile::SetCurrentPath("TinySTG");
 	Global& global = Global::GetInstance();
 	global.phase = Global::PHASE_TUCHIKURE_LOGO;
 	global.back_color = 0;

@@ -4,8 +4,13 @@
 #include "PowerUp.hpp"
 #include "Global.hpp"
 
+int PowerUp::RIGHT_LIMIT;
+int PowerUp::BOTTOM_LIMIT;
+
 PowerUp::PowerUp(void)
 {
+	PowerUp::RIGHT_LIMIT = (Screen::WIDTH << 10) - WIDTH_HALF;
+	PowerUp::BOTTOM_LIMIT = (Screen::HEIGHT << 10) - HEIGHT_HALF;
 }
 
 PowerUp::~PowerUp(void)

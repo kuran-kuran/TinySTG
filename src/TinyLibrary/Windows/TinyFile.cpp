@@ -1,6 +1,13 @@
 #if defined(_WIN32) && !defined(SDL2)
 
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <Windows.h>
+#include <shlwapi.h>
 #include "TinyFile.hpp"
+
+#pragma comment(lib, "shlwapi.lib")
 
 TinyFile::TinyFile(void)
 :file(NULL)
@@ -111,6 +118,29 @@ size_t TinyFile::GetSize(void) const
 long TinyFile::Tell(void)
 {
 	return ftell(this->file);
+}
+
+// カレントディレクトリを設定する
+void TinyFile::SetCurrentPath(const char* assetsPath)
+{
+	struct stat statBuffer;
+	if((stat(assetsPath, &statBuffer) == 0) && (statBuffer.st_mode & _S_IFDIR))
+	{
+		// 指定のアセットがあるのでカレントディレクトリはそのまま
+		return;
+	}
+	char path[MAX_PATH];
+	if(GetModuleFileNameA(NULL, path, MAX_PATH) == 0)
+	{
+		return;
+	}
+	char drive[MAX_PATH];
+	char dir[MAX_PATH];
+	char filename[MAX_PATH];
+	char ext[MAX_PATH];
+	_splitpath_s(path, drive, MAX_PATH, dir, MAX_PATH, filename, MAX_PATH, ext, MAX_PATH);
+	char* exepath = PathCombineA(path, drive, dir);
+	SetCurrentDirectoryA(exepath);
 }
 
 size_t TinyFile::GetLoadSize(const char* filepath)

@@ -2,6 +2,9 @@
 #include "Resource.hpp"
 #include "Bullet.hpp"
 
+int Bullet::RIGHT_LIMIT;
+int Bullet::BOTTOM_LIMIT;
+
 Bullet::Bullet(void)
 :x(0)
 ,y(0)
@@ -10,6 +13,8 @@ Bullet::Bullet(void)
 ,status(STATUS_DEAD)
 ,animation_count(0)
 {
+	Bullet::RIGHT_LIMIT = Screen::WIDTH << 10;
+	Bullet::BOTTOM_LIMIT = Screen::HEIGHT << 10;
 }
 
 Bullet::~Bullet(void)

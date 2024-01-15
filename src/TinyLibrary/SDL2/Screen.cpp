@@ -2,6 +2,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #if defined(_WIN64)
 #pragma comment(lib, "../../lib/sdl2/sdl2/lib/x64/SDL2.lib")
@@ -25,6 +26,9 @@
 
 Screen* Screen::screen = NULL;
 
+int Screen::WIDTH = CONFIG_WIDTH;
+int Screen::HEIGHT = CONFIG_HEIGHT;
+
 const unsigned int Screen::color_table[256] =
 {
 	0xFF000000, 0xFF550000, 0xFFAA0000, 0xFFFF0000, 0xFF002400, 0xFF552400, 0xFFAA2400, 0xFFFF2400, 0xFF004900, 0xFF554900, 0xFFAA4900, 0xFFFF4900, 0xFF006D00, 0xFF556D00, 0xFFAA6D00, 0xFFFF6D00,
@@ -47,20 +51,28 @@ const unsigned int Screen::color_table[256] =
 
 Screen::Screen(int color_mode)
 :color_mode(color_mode)
-,buffer_size(WIDTH * HEIGHT)
 {
-	if(color_mode == 16)
-	{
-		this->buffer_size *= 2;
-	}
-	this->screen_buffer = new unsigned char[this->buffer_size];
-	memset(this->screen_buffer, 0, this->buffer_size);
 	// SDL‰Šú‰»
 	if(SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		throw "Error: SDL_Init(SDL_INIT_VIDEO)";
 	}
 	atexit(SDL_Quit);
+	// RGB30‘Î‰ž(‚à‚µ‰æ–Ê‚ª³•ûŒ`‚¾‚Á‚½ê‡‚Í³•ûŒ`‚É‘Î‰ž‚·‚é)
+	SDL_DisplayMode displayMode;
+	SDL_GetDesktopDisplayMode(0, &displayMode);
+	if(displayMode.w == displayMode.h)
+	{
+		Screen::HEIGHT = Screen::WIDTH;
+	}
+	// screen_buffer‰Šú‰»
+	this->buffer_size = Screen::WIDTH * Screen::HEIGHT;
+	if (color_mode == 16)
+	{
+		this->buffer_size *= 2;
+	}
+	this->screen_buffer = new unsigned char[this->buffer_size];
+	memset(this->screen_buffer, 0, this->buffer_size);
 	this->window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 	if(this->window == NULL)
 	{
@@ -71,14 +83,14 @@ Screen::Screen(int color_mode)
 	{
 		throw "Error: SDL_CreateRenderer";
 	}
-	SDL_RenderSetLogicalSize(renderer, WIDTH, HEIGHT);
+	SDL_RenderSetLogicalSize(renderer, Screen::WIDTH, Screen::HEIGHT);
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	this->screenSurface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0, 0, 0, 0);
+	this->screenSurface = SDL_CreateRGBSurface(0, Screen::WIDTH, Screen::HEIGHT, 32, 0, 0, 0, 0);
 	if(this->screenSurface == NULL)
 	{
 		throw "Error: SDL_CreateRenderer";
 	}
-	memset(this->screenSurface->pixels, 0, WIDTH * HEIGHT * sizeof(unsigned int));
+	memset(this->screenSurface->pixels, 0, static_cast<size_t>(Screen::WIDTH) * Screen::HEIGHT * sizeof(unsigned int));
 }
 
 Screen::~Screen(void)
@@ -121,7 +133,7 @@ void Screen::Clear(unsigned int color)
 	{
 		unsigned short* screen_buffer16 = reinterpret_cast<unsigned short*>(this->screen_buffer);
 		unsigned short color16 = static_cast<unsigned short>(color);
-		for(int i = 0; i < WIDTH * HEIGHT; ++ i)
+		for(int i = 0; i < Screen::WIDTH * Screen::HEIGHT; ++ i)
 		{
 			screen_buffer16[i] = color16;
 		}
@@ -137,13 +149,13 @@ void Screen::DrawEnd(void)
 	unsigned int* frameBuffer = reinterpret_cast<unsigned int*>(this->screenSurface->pixels);
 	if(this->color_mode == 8)
 	{
-		for(int y = 0; y < HEIGHT; ++ y)
+		for(int y = 0; y < Screen::HEIGHT; ++ y)
 		{
-			for(int x = 0; x < WIDTH; ++ x)
+			for(int x = 0; x < Screen::WIDTH; ++ x)
 			{
-				unsigned char color_index = screen_buffer[y * WIDTH + x];
+				unsigned char color_index = screen_buffer[y * Screen::WIDTH + x];
 				unsigned int color = Screen::color_table[color_index];
-				frameBuffer[y * WIDTH + x] = color;
+				frameBuffer[y * Screen::WIDTH + x] = color;
 			}
 		}
 	}
@@ -152,20 +164,20 @@ void Screen::DrawEnd(void)
 		unsigned short* screen_buffer16 = reinterpret_cast<unsigned short*>(this->screen_buffer);
 		for(int y = 0; y < HEIGHT; ++ y)
 		{
-			for(int x = 0; x < WIDTH; ++ x)
+			for(int x = 0; x < Screen::WIDTH; ++ x)
 			{
-				unsigned short color = screen_buffer16[y * WIDTH + x];
-				frameBuffer[y * WIDTH + x] = Color16To32(color);
+				unsigned short color = screen_buffer16[y * Screen::WIDTH + x];
+				frameBuffer[y * Screen::WIDTH + x] = Color16To32(color);
 			}
 		}
 	}
 	SDL_Texture* screenTexture = SDL_CreateTextureFromSurface(this->renderer, this->screenSurface);
 	SDL_Rect sourceRect = {
-		0, 0, WIDTH, HEIGHT
+		0, 0, Screen::WIDTH, Screen::HEIGHT
 	};
 	SDL_Rect destRect =
 	{
-		0, 0, WIDTH, HEIGHT
+		0, 0, Screen::WIDTH, Screen::HEIGHT
 	};
 	SDL_RenderCopy(this->renderer, screenTexture, &sourceRect, &destRect);
 	SDL_DestroyTexture(screenTexture);
@@ -182,20 +194,20 @@ void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height,
 	{
 		return;
 	}
-	if(x >= WIDTH)
+	if(x >= Screen::WIDTH)
 	{
 		return;
 	}
-	if(y >= HEIGHT)
+	if(y >= Screen::HEIGHT)
 	{
 		return;
 	}
 	int clip_width = width;
 	int clip_height = height;
 	const char* clip_buffer = reinterpret_cast<const char*>(buffer);
-	if(x > WIDTH - width)
+	if(x > Screen::WIDTH - width)
 	{
-		clip_width = width - (x - (WIDTH - width));
+		clip_width = width - (x - (Screen::WIDTH - width));
 	}
 	if (x < 0)
 	{
@@ -203,9 +215,9 @@ void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height,
 		clip_width += x;
 		x = 0;
 	}
-	if(y > HEIGHT - height)
+	if(y > Screen::HEIGHT - height)
 	{
-		clip_height = height - (y - (HEIGHT - height));
+		clip_height = height - (y - (Screen::HEIGHT - height));
 	}
 	if(y < 0)
 	{
@@ -226,20 +238,20 @@ void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height,
 	{
 		return;
 	}
-	if(x >= WIDTH)
+	if(x >= Screen::WIDTH)
 	{
 		return;
 	}
-	if(y >= HEIGHT)
+	if(y >= Screen::HEIGHT)
 	{
 		return;
 	}
 	int clip_width = width;
 	int clip_height = height;
 	const char* clip_buffer = reinterpret_cast<const char*>(buffer) + static_cast<size_t>(source_y) * static_cast<size_t>(source_width) + static_cast<size_t>(source_x);
-	if(x > WIDTH - width)
+	if(x > Screen::WIDTH - width)
 	{
-		clip_width = width - (x - (WIDTH - width));
+		clip_width = width - (x - (Screen::WIDTH - width));
 	}
 	if (x < 0)
 	{
@@ -247,9 +259,9 @@ void Screen::DrawSprite(const void* buffer, int x, int y, int width, int height,
 		clip_width += x;
 		x = 0;
 	}
-	if(y > HEIGHT - height)
+	if(y > Screen::HEIGHT - height)
 	{
-		clip_height = height - (y - (HEIGHT - height));
+		clip_height = height - (y - (Screen::HEIGHT - height));
 	}
 	if (y < 0)
 	{
@@ -294,7 +306,7 @@ void Screen::DrawSprite(int destination_x, int destination_y, int destination_le
 				}
 				if(pixel != color_key)
 				{
-					this->screen_buffer[WIDTH * y + x] = pixel;
+					this->screen_buffer[Screen::WIDTH * y + x] = pixel;
 				}
 			}
 		}
@@ -318,7 +330,7 @@ void Screen::DrawSprite(int destination_x, int destination_y, int destination_le
 				}
 				if(pixel != color_key)
 				{
-					screen_buffer16[WIDTH * y + x] = pixel;
+					screen_buffer16[Screen::WIDTH * y + x] = pixel;
 				}
 			}
 		}
@@ -429,7 +441,7 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 	}
 	if(x == CENTER)
 	{
-		x = ((WIDTH - 6 * static_cast<int>(strlen(output_text))) >> 1);
+		x = ((Screen::WIDTH - 6 * static_cast<int>(strlen(output_text))) >> 1);
 	}
 	else if(x == LEFT)
 	{
@@ -437,11 +449,11 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 	}
 	else if(x == RIGHT)
 	{
-		x = WIDTH - 6 * static_cast<int>(strlen(output_text));
+		x = Screen::WIDTH - 6 * static_cast<int>(strlen(output_text));
 	}
 	if(y == CENTER)
 	{
-		y = ((HEIGHT - 8) >> 1);
+		y = ((Screen::HEIGHT - 8) >> 1);
 	}
 	else if(y == TOP)
 	{
@@ -449,7 +461,7 @@ void Screen::DrawFont(int x, int y, const char* text, ...)
 	}
 	else if(x == BOTTOM)
 	{
-		y = HEIGHT - 8;
+		y = Screen::HEIGHT - 8;
 	}
 	while(*output_text_temp != 0)
 	{
@@ -489,7 +501,7 @@ void Screen::DrawJapaneseFont(int x, int y, const char* text)
 	}
 	if(x == CENTER)
 	{
-		x = ((WIDTH - 6 * static_cast<int>(strlen(text))) >> 1);
+		x = ((Screen::WIDTH - 6 * static_cast<int>(strlen(text))) >> 1);
 	}
 	else if(x == LEFT)
 	{
@@ -497,11 +509,11 @@ void Screen::DrawJapaneseFont(int x, int y, const char* text)
 	}
 	else if(x == RIGHT)
 	{
-		x = WIDTH - 6 * static_cast<int>(strlen(text));
+		x = Screen::WIDTH - 6 * static_cast<int>(strlen(text));
 	}
 	if(y == CENTER)
 	{
-		y = ((HEIGHT - 8) >> 1);
+		y = ((Screen::HEIGHT - 8) >> 1);
 	}
 	else if(y == TOP)
 	{
@@ -509,7 +521,7 @@ void Screen::DrawJapaneseFont(int x, int y, const char* text)
 	}
 	else if(x == BOTTOM)
 	{
-		y = HEIGHT - 8;
+		y = Screen::HEIGHT - 8;
 	}
 	while(*text_temp != 0)
 	{
@@ -558,7 +570,7 @@ void Screen::DrawNumberFont(int x, int y, const char* text, ...)
 	}
 	if(x == CENTER)
 	{
-		x = ((WIDTH - 4 * static_cast<int>(strlen(output_text))) >> 1);
+		x = ((Screen::WIDTH - 4 * static_cast<int>(strlen(output_text))) >> 1);
 	}
 	else if(x == LEFT)
 	{
@@ -566,11 +578,11 @@ void Screen::DrawNumberFont(int x, int y, const char* text, ...)
 	}
 	else if(x == RIGHT)
 	{
-		x = WIDTH - 4 * static_cast<int>(strlen(output_text));
+		x = Screen::WIDTH - 4 * static_cast<int>(strlen(output_text));
 	}
 	if(y == CENTER)
 	{
-		y = ((HEIGHT - 6) >> 1);
+		y = ((Screen::HEIGHT - 6) >> 1);
 	}
 	else if(y == TOP)
 	{
@@ -578,7 +590,7 @@ void Screen::DrawNumberFont(int x, int y, const char* text, ...)
 	}
 	else if(x == BOTTOM)
 	{
-		y = HEIGHT - 6;
+		y = Screen::HEIGHT - 6;
 	}
 	while(*output_text_temp != 0)
 	{
@@ -596,7 +608,7 @@ void Screen::DrawNumberFont(int x, int y, const char* text, ...)
 
 void Screen::DrawRectangle(int x, int y, int width, int height, unsigned int color)
 {
-	int destination_address = WIDTH * y + x;
+	int destination_address = Screen::WIDTH * y + x;
 	if(this->color_mode == 8)
 	{
 		for(int scan_y = 0; scan_y < height; ++ scan_y)
@@ -605,7 +617,7 @@ void Screen::DrawRectangle(int x, int y, int width, int height, unsigned int col
 			{
 				this->screen_buffer[destination_address + scan_x] = static_cast<unsigned char>(color);
 			}
-			destination_address += WIDTH;
+			destination_address += Screen::WIDTH;
 		}
 	}
 	else
@@ -617,7 +629,7 @@ void Screen::DrawRectangle(int x, int y, int width, int height, unsigned int col
 			{
 				screen_buffer16[destination_address + scan_x] = static_cast<unsigned short>(color);
 			}
-			destination_address += WIDTH;
+			destination_address += Screen::WIDTH;
 		}
 	}
 }
@@ -625,7 +637,7 @@ void Screen::DrawRectangle(int x, int y, int width, int height, unsigned int col
 void Screen::DrawSpriteNoClip(const void* buffer, int x, int y, int width, int height, int color_key, int source_width)
 {
 	int source_address = 0;
-	int destination_address = WIDTH * y + x;
+	int destination_address = Screen::WIDTH * y + x;
 	if(this->color_mode == 8)
 	{
 		const unsigned char* buffer8 = reinterpret_cast<const unsigned char*>(buffer);
@@ -640,7 +652,7 @@ void Screen::DrawSpriteNoClip(const void* buffer, int x, int y, int width, int h
 				}
 			}
 			source_address += source_width;
-			destination_address += WIDTH;
+			destination_address += Screen::WIDTH;
 		}
 	}
 	else
@@ -658,7 +670,7 @@ void Screen::DrawSpriteNoClip(const void* buffer, int x, int y, int width, int h
 				}
 			}
 			source_address += source_width;
-			destination_address += WIDTH;
+			destination_address += Screen::WIDTH;
 		}
 	}
 }

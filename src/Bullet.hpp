@@ -13,12 +13,12 @@ public:
 		WIDTH_HALF = WIDTH / 2,
 		HEIGHT_HALF = HEIGHT / 2,
 		LEFT_LIMIT = -WIDTH,
-		RIGHT_LIMIT = Screen::WIDTH << 10,
 		TOP_LIMIT = -HEIGHT,
-		BOTTOM_LIMIT = Screen::HEIGHT << 10,
 		STATUS_DEAD = 0,
 		STATUS_ALIVE,
 	};
+	static int RIGHT_LIMIT;
+	static int BOTTOM_LIMIT;
 	Bullet(void);
 	~Bullet(void);
 	void Initialize(int x, int y, int vx, int vy);

@@ -129,7 +129,8 @@ ArduinoIDEでTinySTG.inoを読み込んでビルドする。
 
 ## ライセンス
 TinySTGはMIT Licenseとします。  
-SDL 2.0はzlibライセンス, SDL 1.2はGNU LGPLライセンスです。  
+しかしRGnano版、WindowsSDL版はSDL 1.2を使用しているためGNU LGPLライセンスになります。
+SDL 2.0はzlibライセンスです。
 
 ## 作者について
 - Twitter
